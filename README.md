@@ -1,73 +1,212 @@
-# Welcome to your Lovable project
+# NGO Reach Platform
 
-## Project info
+A comprehensive internship management platform that connects NGOs with interns through a modern web application built with React, TypeScript, and Supabase.
 
-**URL**: https://lovable.dev/projects/acdcd4cd-8bda-44e3-9961-78b3fd8d22b8
+## 🌟 Features
 
-## How can I edit this code?
+### 🔐 Authentication & User Management
+- Secure user registration and login
+- Protected routes for authenticated users
+- User profile management
+- Role-based access control
 
-There are several ways of editing your application.
+### 📋 Application Management
+- Multi-step internship application form
+- Application status tracking
+- PDF download functionality for applications
+- Resume upload and management
 
-**Use Lovable**
+### 💰 Fundraising System
+- Progress tracking for fundraising goals
+- Leaderboard with real-time rankings
+- Milestone rewards and badges
+- Progress update functionality
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/acdcd4cd-8bda-44e3-9961-78b3fd8d22b8) and start prompting.
+### 🔗 Affiliate Payment Links
+- Personalized payment links for each user
+- Public donation pages
+- Payment tracking and statistics
+- Shareable donation links
 
-Changes made via Lovable will be committed automatically to this repo.
+### 📊 Admin Dashboard
+- Comprehensive fundraising data overview
+- Export functionality for data analysis
+- User management and monitoring
+- Real-time statistics
 
-**Use your preferred IDE**
+### 🏆 Certificate System
+- Automatic certificate generation
+- PDF download for completion certificates
+- Eligibility tracking based on progress
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+## 🛠️ Tech Stack
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+- **Frontend**: React 18, TypeScript, Vite
+- **UI Components**: shadcn/ui, Tailwind CSS
+- **Backend**: Supabase (PostgreSQL, Auth, Storage)
+- **State Management**: React Query, React Context
+- **Routing**: React Router DOM
+- **Forms**: React Hook Form
+- **PDF Generation**: jsPDF, html2canvas
 
-Follow these steps:
+## 🚀 Quick Start
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+### Prerequisites
+- Node.js 18+ 
+- npm or yarn
+- Supabase account
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
+### Installation
 
-# Step 3: Install the necessary dependencies.
-npm i
+1. **Clone the repository**
+   ```bash
+   git clone https://github.com/JiwansOza/ngo-internship-portal.git
+   cd ngo-internship-portal
+   ```
 
-# Step 4: Start the development server with auto-reloading and an instant preview.
-npm run dev
+2. **Install dependencies**
+   ```bash
+   npm install
+   ```
+
+3. **Set up environment variables**
+   Create a `.env` file in the root directory:
+   ```env
+   VITE_SUPABASE_URL=your_supabase_url
+   VITE_SUPABASE_ANON_KEY=your_supabase_anon_key
+   ```
+
+4. **Set up the database**
+   - Run the SQL scripts in `supabase/migrations/`
+   - Or use the complete setup script: `complete-database-setup.sql`
+
+5. **Start the development server**
+   ```bash
+   npm run dev
+   ```
+
+6. **Open your browser**
+   Navigate to `http://localhost:5173`
+
+## 📁 Project Structure
+
+```
+ngo-internship-portal/
+├── public/                 # Static assets
+│   ├── favicon.svg        # Platform favicon
+│   └── icon-512.svg       # App icon
+├── src/
+│   ├── components/        # Reusable UI components
+│   │   ├── auth/         # Authentication components
+│   │   ├── layout/       # Layout components
+│   │   └── ui/           # shadcn/ui components
+│   ├── hooks/            # Custom React hooks
+│   ├── integrations/     # External service integrations
+│   │   └── supabase/     # Supabase client and types
+│   ├── lib/              # Utility functions
+│   ├── pages/            # Application pages
+│   └── main.tsx          # Application entry point
+├── supabase/             # Database migrations
+└── scripts/              # Utility scripts
 ```
 
-**Edit a file directly in GitHub**
+## 🗄️ Database Schema
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+### Core Tables
+- `profiles` - User profile information
+- `applications` - Internship applications
+- `onboarding_tasks` - User onboarding checklist
+- `fundraising_progress` - Fundraising tracking
+- `certificates` - Certificate eligibility
+- `affiliate_links` - Payment links
+- `donations` - Donation records
 
-**Use GitHub Codespaces**
+## 🔧 Configuration
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+### Supabase Setup
+1. Create a new Supabase project
+2. Enable Row Level Security (RLS)
+3. Run the migration scripts
+4. Configure authentication settings
+5. Set up storage buckets for resumes
 
-## What technologies are used for this project?
+### Environment Variables
+```env
+VITE_SUPABASE_URL=https://your-project.supabase.co
+VITE_SUPABASE_ANON_KEY=your_anon_key
+```
 
-This project is built with:
+## 📱 Features in Detail
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+### Application System
+- Multi-step form with progress indicators
+- File upload for resumes
+- Real-time validation
+- Status tracking and updates
 
-## How can I deploy this project?
+### Fundraising Platform
+- Goal setting and progress tracking
+- Leaderboard with rankings
+- Milestone achievements
+- Progress visualization
 
-Simply open [Lovable](https://lovable.dev/projects/acdcd4cd-8bda-44e3-9961-78b3fd8d22b8) and click on Share -> Publish.
+### Affiliate Links
+- Unique payment links per user
+- Customizable campaign details
+- Public donation pages
+- Payment tracking and analytics
 
-## Can I connect a custom domain to my Lovable project?
+### Admin Features
+- Comprehensive data overview
+- Export functionality
+- User management
+- Real-time monitoring
 
-Yes, you can!
+## 🚀 Deployment
 
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
+### Vercel (Recommended)
+1. Connect your GitHub repository
+2. Set environment variables
+3. Deploy automatically
 
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/tips-tricks/custom-domain#step-by-step-guide)
+### Netlify
+1. Build command: `npm run build`
+2. Publish directory: `dist`
+3. Set environment variables
+
+### Manual Deployment
+```bash
+npm run build
+# Serve the dist folder
+```
+
+## 🤝 Contributing
+
+1. Fork the repository
+2. Create a feature branch
+3. Make your changes
+4. Submit a pull request
+
+## 📄 License
+
+This project is licensed under the MIT License.
+
+## 🆘 Support
+
+For support and questions:
+- Create an issue in this repository
+- Check the documentation in the `/docs` folder
+- Review the SQL setup scripts
+
+## 🎯 Roadmap
+
+- [ ] Mobile app development
+- [ ] Advanced analytics dashboard
+- [ ] Payment gateway integration
+- [ ] Email notification system
+- [ ] Multi-language support
+- [ ] Advanced reporting features
+
+---
+
+**Built with ❤️ for the NGO community**
