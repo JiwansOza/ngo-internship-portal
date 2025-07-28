@@ -449,11 +449,11 @@ export default function Dashboard() {
               <div className="w-8 h-8 bg-gradient-to-br from-primary to-primary/80 rounded-lg flex items-center justify-center">
                 <Users className="h-5 w-5 text-white" />
               </div>
-              <h1 className="text-lg font-semibold text-gray-900">NGO Reach</h1>
+              <h1 className="text-base sm:text-lg font-semibold text-gray-900">NGO Reach</h1>
             </div>
 
             {/* User Menu */}
-            <div className="flex items-center space-x-3">
+            <div className="flex items-center space-x-2 sm:space-x-3">
               {/* User Info */}
               <div className="hidden sm:flex items-center space-x-2 text-sm text-gray-600">
                 <div className="w-2 h-2 bg-green-500 rounded-full"></div>
@@ -461,14 +461,14 @@ export default function Dashboard() {
               </div>
 
               {/* Navigation Buttons */}
-              <div className="flex items-center space-x-2">
+              <div className="flex items-center space-x-1 sm:space-x-2">
                 <Button 
                   variant="ghost" 
                   size="sm" 
                   onClick={() => navigate("/affiliate")}
-                  className="text-gray-600 hover:text-primary hover:bg-primary/5"
+                  className="text-gray-600 hover:text-primary hover:bg-primary/5 p-2 sm:px-3"
                 >
-                  <Link className="w-4 h-4 mr-1" />
+                  <Link className="w-4 h-4 sm:mr-1" />
                   <span className="hidden sm:inline">Link</span>
                 </Button>
                 
@@ -476,9 +476,9 @@ export default function Dashboard() {
                   variant="ghost" 
                   size="sm" 
                   onClick={() => navigate("/admin/fundraising")}
-                  className="text-gray-600 hover:text-primary hover:bg-primary/5"
+                  className="text-gray-600 hover:text-primary hover:bg-primary/5 p-2 sm:px-3"
                 >
-                  <BarChart3 className="w-4 h-4 mr-1" />
+                  <BarChart3 className="w-4 h-4 sm:mr-1" />
                   <span className="hidden sm:inline">Admin</span>
                 </Button>
                 
@@ -486,9 +486,9 @@ export default function Dashboard() {
                   variant="ghost" 
                   size="sm" 
                   onClick={handleSignOut}
-                  className="text-gray-600 hover:text-red-600 hover:bg-red-50"
+                  className="text-gray-600 hover:text-red-600 hover:bg-red-50 p-2 sm:px-3"
                 >
-                  <LogOut className="w-4 h-4 mr-1" />
+                  <LogOut className="w-4 h-4 sm:mr-1" />
                   <span className="hidden sm:inline">Sign Out</span>
                 </Button>
               </div>
@@ -497,25 +497,25 @@ export default function Dashboard() {
         </div>
       </header>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
         {/* Welcome Section */}
-        <div className="mb-8">
+        <div className="mb-6 sm:mb-8">
           <div className="flex items-center space-x-3 mb-2">
             <div className="w-2 h-2 bg-primary rounded-full animate-pulse"></div>
-            <h2 className="text-2xl font-bold text-gray-900">Welcome back!</h2>
+            <h2 className="text-xl sm:text-2xl font-bold text-gray-900">Welcome back!</h2>
           </div>
-          <p className="text-gray-600">Track your progress and stay updated with your internship journey.</p>
+          <p className="text-sm sm:text-base text-gray-600">Track your progress and stay updated with your internship journey.</p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 sm:gap-8">
           {/* Main Content */}
-          <div className="lg:col-span-2 space-y-8">
+          <div className="lg:col-span-2 space-y-6 sm:space-y-8">
             {/* Application Status */}
             <Card className="shadow-lg border-0 bg-white/80 backdrop-blur-sm hover:shadow-xl transition-all duration-300">
               <CardHeader>
                 <CardTitle className="flex items-center">
-                  <div className="w-10 h-10 bg-gradient-to-br from-blue-500 to-blue-600 rounded-xl flex items-center justify-center mr-3">
-                    <FileText className="w-5 h-5 text-white" />
+                  <div className="w-8 h-8 sm:w-10 sm:h-10 bg-gradient-to-br from-blue-500 to-blue-600 rounded-xl flex items-center justify-center mr-3">
+                    <FileText className="w-4 h-4 sm:w-5 sm:h-5 text-white" />
                   </div>
                   Application Status
                 </CardTitle>
@@ -524,18 +524,18 @@ export default function Dashboard() {
               <CardContent>
                 {application ? (
                   <div className="space-y-4">
-                    <div className="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
+                    <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between p-4 bg-gray-50 rounded-lg space-y-2 sm:space-y-0">
                       <div>
-                        <p className="text-sm text-gray-600 mb-1">
+                        <p className="text-xs sm:text-sm text-gray-600 mb-1">
                           Applied on: {new Date(application.created_at).toLocaleDateString()}
                         </p>
-                        <p className="text-sm text-gray-500">
+                        <p className="text-xs sm:text-sm text-gray-500">
                           Application ID: {application.id.slice(0, 8)}...
                         </p>
                       </div>
                       {getStatusBadge(application.status)}
                     </div>
-                    <div className="flex space-x-2">
+                    <div className="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-2">
                       <Button 
                         variant="outline" 
                         size="sm" 
@@ -557,11 +557,11 @@ export default function Dashboard() {
                     </div>
                   </div>
                 ) : (
-                  <div className="text-center py-8">
-                    <div className="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                      <FileText className="w-8 h-8 text-gray-400" />
+                  <div className="text-center py-6 sm:py-8">
+                    <div className="w-12 h-12 sm:w-16 sm:h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                      <FileText className="w-6 h-6 sm:w-8 sm:h-8 text-gray-400" />
                     </div>
-                    <p className="text-gray-600 mb-4">You haven't submitted an application yet.</p>
+                    <p className="text-sm sm:text-base text-gray-600 mb-4">You haven't submitted an application yet.</p>
                     <Button onClick={() => navigate("/apply")} className="bg-gradient-to-r from-primary to-primary/80 hover:from-primary/90 hover:to-primary/70">
                       <ArrowRight className="w-4 h-4 mr-2" />
                       Submit Application
@@ -588,7 +588,7 @@ export default function Dashboard() {
                     {/* Basic Information */}
                     <div className="space-y-4">
                       <h3 className="text-lg font-semibold text-gray-900">Basic Information</h3>
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                         <div className="space-y-2">
                           <label className="text-sm font-medium text-gray-600">Application ID</label>
                           <p className="text-sm text-gray-900 font-mono bg-gray-50 p-2 rounded">{application.id}</p>
@@ -647,7 +647,7 @@ export default function Dashboard() {
                     </div>
 
                     {/* Actions */}
-                    <div className="flex space-x-2 pt-4 border-t">
+                    <div className="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-2 pt-4 border-t">
                       <Button 
                         variant="outline" 
                         className="flex-1"
@@ -673,8 +673,8 @@ export default function Dashboard() {
             <Card className="shadow-lg border-0 bg-white/80 backdrop-blur-sm hover:shadow-xl transition-all duration-300">
               <CardHeader>
                 <CardTitle className="flex items-center">
-                  <div className="w-10 h-10 bg-gradient-to-br from-green-500 to-green-600 rounded-xl flex items-center justify-center mr-3">
-                    <CheckCircle className="w-5 h-5 text-white" />
+                  <div className="w-8 h-8 sm:w-10 sm:h-10 bg-gradient-to-br from-green-500 to-green-600 rounded-xl flex items-center justify-center mr-3">
+                    <CheckCircle className="w-4 h-4 sm:w-5 sm:h-5 text-white" />
                   </div>
                   Onboarding Checklist
                 </CardTitle>
@@ -682,7 +682,7 @@ export default function Dashboard() {
               </CardHeader>
               <CardContent>
                 <div className="space-y-4">
-                  <div className="flex items-center justify-between mb-4">
+                  <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-4 space-y-2 sm:space-y-0">
                     <span className="text-sm font-medium">Progress</span>
                     <div className="flex items-center space-x-2">
                       <span className="text-sm text-gray-600">{completedTasks}/{tasks.length} completed</span>
@@ -695,21 +695,21 @@ export default function Dashboard() {
                   
                   <div className="space-y-3">
                     {tasks.map((task, index) => (
-                      <div key={task.id} className="flex items-center space-x-3 p-4 rounded-xl border border-gray-200 hover:border-primary/30 transition-all duration-200 group">
-                        <div className="relative">
+                      <div key={task.id} className="flex items-start space-x-3 p-4 rounded-xl border border-gray-200 hover:border-primary/30 transition-all duration-200 group">
+                        <div className="relative mt-1">
                           <input
                             type="checkbox"
                             checked={task.is_completed}
                             onChange={() => toggleTask(task.id, task.is_completed)}
-                            className="h-5 w-5 text-primary focus:ring-primary border-gray-300 rounded transition-all duration-200"
+                            className="h-4 w-4 sm:h-5 sm:w-5 text-primary focus:ring-primary border-gray-300 rounded transition-all duration-200"
                           />
                           {task.is_completed && (
-                            <CheckCircle className="w-5 h-5 text-primary absolute -top-0.5 -right-0.5 animate-pulse" />
+                            <CheckCircle className="w-4 h-4 sm:w-5 sm:h-5 text-primary absolute -top-0.5 -right-0.5 animate-pulse" />
                           )}
                         </div>
-                        <div className="flex-1">
+                        <div className="flex-1 min-w-0">
                           <div className="flex items-center space-x-2">
-                            <h4 className={`font-medium ${task.is_completed ? 'line-through text-gray-500' : 'text-gray-900'}`}>
+                            <h4 className={`font-medium text-sm sm:text-base ${task.is_completed ? 'line-through text-gray-500' : 'text-gray-900'}`}>
                               {task.task_name}
                             </h4>
                             {index === 0 && !task.is_completed && (
@@ -719,10 +719,10 @@ export default function Dashboard() {
                             )}
                           </div>
                           {task.description && (
-                            <p className="text-sm text-gray-600 mt-1">{task.description}</p>
+                            <p className="text-xs sm:text-sm text-gray-600 mt-1">{task.description}</p>
                           )}
                         </div>
-                        <div className="text-xs text-gray-400">
+                        <div className="text-xs text-gray-400 flex-shrink-0">
                           #{index + 1}
                         </div>
                       </div>
@@ -734,13 +734,13 @@ export default function Dashboard() {
           </div>
 
           {/* Sidebar */}
-          <div className="space-y-8">
+          <div className="space-y-6 sm:space-y-8">
             {/* Fundraising Progress */}
             <Card className="shadow-lg border-0 bg-white/80 backdrop-blur-sm hover:shadow-xl transition-all duration-300">
               <CardHeader>
                 <CardTitle className="flex items-center">
-                  <div className="w-10 h-10 bg-gradient-to-br from-purple-500 to-purple-600 rounded-xl flex items-center justify-center mr-3">
-                    <Target className="w-5 h-5 text-white" />
+                  <div className="w-8 h-8 sm:w-10 sm:h-10 bg-gradient-to-br from-purple-500 to-purple-600 rounded-xl flex items-center justify-center mr-3">
+                    <Target className="w-4 h-4 sm:w-5 sm:h-5 text-white" />
                   </div>
                   Fundraising Goal
                 </CardTitle>
@@ -750,15 +750,15 @@ export default function Dashboard() {
                 {fundraising && (
                   <div className="space-y-4">
                     <div className="text-center">
-                      <div className="text-3xl font-bold text-primary mb-1">
+                      <div className="text-2xl sm:text-3xl font-bold text-primary mb-1">
                         ₹{fundraising.collected_amount.toLocaleString()}
                       </div>
-                      <div className="text-sm text-gray-600">
+                      <div className="text-xs sm:text-sm text-gray-600">
                         of ₹{fundraising.target_amount.toLocaleString()} goal
                       </div>
                     </div>
                     <Progress value={progressPercentage} className="h-3" />
-                    <div className="text-center text-sm text-gray-600">
+                    <div className="text-center text-xs sm:text-sm text-gray-600">
                       {Math.round(progressPercentage)}% completed
                     </div>
                     <Button className="w-full bg-gradient-to-r from-primary to-primary/80 hover:from-primary/90 hover:to-primary/70" onClick={() => navigate("/fundraising")}>
@@ -774,8 +774,8 @@ export default function Dashboard() {
             <Card className="shadow-lg border-0 bg-white/80 backdrop-blur-sm hover:shadow-xl transition-all duration-300">
               <CardHeader>
                 <CardTitle className="flex items-center">
-                  <div className="w-10 h-10 bg-gradient-to-br from-yellow-500 to-yellow-600 rounded-xl flex items-center justify-center mr-3">
-                    <Award className="w-5 h-5 text-white" />
+                  <div className="w-8 h-8 sm:w-10 sm:h-10 bg-gradient-to-br from-yellow-500 to-yellow-600 rounded-xl flex items-center justify-center mr-3">
+                    <Award className="w-4 h-4 sm:w-5 sm:h-5 text-white" />
                   </div>
                   Certificate
                 </CardTitle>
@@ -785,10 +785,10 @@ export default function Dashboard() {
                 {certificate?.is_eligible ? (
                   <div className="text-center space-y-4">
                     <div className="text-green-600">
-                      <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-3">
-                        <CheckCircle className="w-8 h-8 text-green-600" />
+                      <div className="w-12 h-12 sm:w-16 sm:h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-3">
+                        <CheckCircle className="w-6 h-6 sm:w-8 sm:h-8 text-green-600" />
                       </div>
-                      <p className="font-medium">Certificate Ready!</p>
+                      <p className="font-medium text-sm sm:text-base">Certificate Ready!</p>
                     </div>
                     <Button 
                       className="w-full bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700"
@@ -801,11 +801,11 @@ export default function Dashboard() {
                 ) : (
                   <div className="text-center space-y-4">
                     <div className="text-gray-400">
-                      <div className="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-3">
-                        <Clock className="w-8 h-8 text-gray-400" />
+                      <div className="w-12 h-12 sm:w-16 sm:h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-3">
+                        <Clock className="w-6 h-6 sm:w-8 sm:h-8 text-gray-400" />
                       </div>
-                      <p className="font-medium">Certificate Not Ready</p>
-                      <p className="text-sm text-gray-600 mt-2">
+                      <p className="font-medium text-sm sm:text-base">Certificate Not Ready</p>
+                      <p className="text-xs sm:text-sm text-gray-600 mt-2">
                         Complete your tasks and fundraising goals to become eligible
                       </p>
                     </div>
@@ -818,8 +818,8 @@ export default function Dashboard() {
             <Card className="shadow-lg border-0 bg-white/80 backdrop-blur-sm hover:shadow-xl transition-all duration-300">
               <CardHeader>
                 <CardTitle className="flex items-center">
-                  <div className="w-10 h-10 bg-gradient-to-br from-purple-500 to-purple-600 rounded-xl flex items-center justify-center mr-3">
-                    <Link className="w-5 h-5 text-white" />
+                  <div className="w-8 h-8 sm:w-10 sm:h-10 bg-gradient-to-br from-purple-500 to-purple-600 rounded-xl flex items-center justify-center mr-3">
+                    <Link className="w-4 h-4 sm:w-5 sm:h-5 text-white" />
                   </div>
                   Share Your Link
                 </CardTitle>
@@ -828,11 +828,11 @@ export default function Dashboard() {
               <CardContent>
                 <div className="text-center space-y-4">
                   <div className="text-purple-600">
-                    <div className="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-3">
-                      <Share2 className="w-8 h-8 text-purple-600" />
+                    <div className="w-12 h-12 sm:w-16 sm:h-16 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-3">
+                      <Share2 className="w-6 h-6 sm:w-8 sm:h-8 text-purple-600" />
                     </div>
-                    <p className="font-medium">Ready to Share!</p>
-                    <p className="text-sm text-gray-600 mt-1">Get your personalized payment link</p>
+                    <p className="font-medium text-sm sm:text-base">Ready to Share!</p>
+                    <p className="text-xs sm:text-sm text-gray-600 mt-1">Get your personalized payment link</p>
                   </div>
                   <Button 
                     className="w-full bg-gradient-to-r from-purple-500 to-purple-600 hover:from-purple-600 hover:to-purple-700"
@@ -849,8 +849,8 @@ export default function Dashboard() {
             <Card className="shadow-lg border-0 bg-white/80 backdrop-blur-sm">
               <CardHeader>
                 <CardTitle className="flex items-center">
-                  <div className="w-10 h-10 bg-gradient-to-br from-blue-500 to-blue-600 rounded-xl flex items-center justify-center mr-3">
-                    <Star className="w-5 h-5 text-white" />
+                  <div className="w-8 h-8 sm:w-10 sm:h-10 bg-gradient-to-br from-blue-500 to-blue-600 rounded-xl flex items-center justify-center mr-3">
+                    <Star className="w-4 h-4 sm:w-5 sm:h-5 text-white" />
                   </div>
                   Quick Stats
                 </CardTitle>
@@ -858,16 +858,16 @@ export default function Dashboard() {
               <CardContent>
                 <div className="space-y-4">
                   <div className="flex justify-between items-center">
-                    <span className="text-sm text-gray-600">Tasks Completed</span>
-                    <span className="font-semibold text-primary">{completedTasks}/{tasks.length}</span>
+                    <span className="text-xs sm:text-sm text-gray-600">Tasks Completed</span>
+                    <span className="font-semibold text-primary text-sm sm:text-base">{completedTasks}/{tasks.length}</span>
                   </div>
                   <div className="flex justify-between items-center">
-                    <span className="text-sm text-gray-600">Fundraising Progress</span>
-                    <span className="font-semibold text-primary">{Math.round(progressPercentage)}%</span>
+                    <span className="text-xs sm:text-sm text-gray-600">Fundraising Progress</span>
+                    <span className="font-semibold text-primary text-sm sm:text-base">{Math.round(progressPercentage)}%</span>
                   </div>
                   <div className="flex justify-between items-center">
-                    <span className="text-sm text-gray-600">Days Active</span>
-                    <span className="font-semibold text-primary">7</span>
+                    <span className="text-xs sm:text-sm text-gray-600">Days Active</span>
+                    <span className="font-semibold text-primary text-sm sm:text-base">7</span>
                   </div>
                 </div>
               </CardContent>

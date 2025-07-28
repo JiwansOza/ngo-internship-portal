@@ -151,32 +151,32 @@ export default function ApplicationForm() {
                 variant="ghost"
                 size="sm"
                 onClick={() => navigate("/dashboard")}
-                className="mr-4 hover:bg-primary/5"
+                className="mr-2 sm:mr-4 hover:bg-primary/5 p-2 sm:px-3"
               >
-                <ArrowLeft className="w-4 h-4 mr-2" />
-                Back to Dashboard
+                <ArrowLeft className="w-4 h-4 sm:mr-2" />
+                <span className="hidden sm:inline">Back to Dashboard</span>
               </Button>
               <div className="relative">
-                <Users className="h-8 w-8 text-primary mr-3" />
-                <Sparkles className="h-4 w-4 text-primary/60 animate-ping absolute -top-1 -right-1" />
+                <Users className="h-6 w-6 sm:h-8 sm:w-8 text-primary mr-2 sm:mr-3" />
+                <Sparkles className="h-3 w-3 sm:h-4 sm:w-4 text-primary/60 animate-ping absolute -top-1 -right-1" />
               </div>
-              <h1 className="text-xl font-semibold text-gray-900">NGO Internship Portal</h1>
+              <h1 className="text-base sm:text-xl font-semibold text-gray-900">NGO Internship Portal</h1>
             </div>
           </div>
         </div>
       </header>
 
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
         {/* Progress Steps */}
-        <div className="mb-8">
-          <div className="flex items-center justify-between mb-6">
-            <h2 className="text-2xl font-bold text-gray-900">Internship Application</h2>
-            <Badge className="bg-primary/10 text-primary border-primary/20">
+        <div className="mb-6 sm:mb-8">
+          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-4 sm:mb-6 space-y-2 sm:space-y-0">
+            <h2 className="text-xl sm:text-2xl font-bold text-gray-900">Internship Application</h2>
+            <Badge className="bg-primary/10 text-primary border-primary/20 w-fit">
               Step {currentStep} of 3
             </Badge>
           </div>
           
-          <div className="flex items-center justify-between mb-8">
+          <div className="flex items-center justify-between mb-6 sm:mb-8">
             {steps.map((step, index) => {
               const Icon = step.icon;
               const isActive = currentStep === step.id;
@@ -184,7 +184,7 @@ export default function ApplicationForm() {
               
               return (
                 <div key={step.id} className="flex items-center">
-                  <div className={`flex items-center justify-center w-10 h-10 rounded-full border-2 transition-all duration-300 ${
+                  <div className={`flex items-center justify-center w-8 h-8 sm:w-10 sm:h-10 rounded-full border-2 transition-all duration-300 ${
                     isCompleted 
                       ? 'bg-green-500 border-green-500 text-white' 
                       : isActive 
@@ -192,18 +192,22 @@ export default function ApplicationForm() {
                         : 'bg-gray-100 border-gray-300 text-gray-500'
                   }`}>
                     {isCompleted ? (
-                      <CheckCircle className="w-5 h-5" />
+                      <CheckCircle className="w-4 h-4 sm:w-5 sm:h-5" />
                     ) : (
-                      <Icon className="w-5 h-5" />
+                      <Icon className="w-4 h-4 sm:w-5 sm:h-5" />
                     )}
                   </div>
-                  <span className={`ml-2 text-sm font-medium ${
-                    isActive ? 'text-primary' : isCompleted ? 'text-green-600' : 'text-gray-500'
+                  <span className={`ml-2 text-xs sm:text-sm font-medium ${
+                    isCompleted 
+                      ? 'text-green-600' 
+                      : isActive 
+                        ? 'text-primary' 
+                        : 'text-gray-500'
                   }`}>
                     {step.title}
                   </span>
                   {index < steps.length - 1 && (
-                    <div className={`w-16 h-0.5 mx-4 ${
+                    <div className={`w-8 sm:w-12 h-0.5 mx-2 ${
                       isCompleted ? 'bg-green-500' : 'bg-gray-300'
                     }`} />
                   )}
@@ -213,193 +217,179 @@ export default function ApplicationForm() {
           </div>
         </div>
 
-        <Card className="shadow-xl border-0 bg-white/80 backdrop-blur-sm">
-          <CardHeader className="text-center">
-            <CardTitle className="text-2xl flex items-center justify-center">
-              <div className="w-12 h-12 bg-gradient-to-br from-primary to-primary/80 rounded-xl flex items-center justify-center mr-3">
-                <FileText className="w-6 h-6 text-white" />
+        {/* Form */}
+        <Card className="shadow-lg border-0 bg-white/80 backdrop-blur-sm">
+          <CardHeader>
+            <CardTitle className="flex items-center">
+              <div className="w-8 h-8 sm:w-10 sm:h-10 bg-gradient-to-br from-primary to-primary/80 rounded-xl flex items-center justify-center mr-3">
+                <FileText className="w-4 h-4 sm:w-5 sm:h-5 text-white" />
               </div>
-              Internship Application
+              {currentStep === 1 && "Personal Information"}
+              {currentStep === 2 && "Resume Upload"}
+              {currentStep === 3 && "Motivation Statement"}
             </CardTitle>
-            <CardDescription className="text-lg">
-              Tell us about yourself and why you want to join our mission
+            <CardDescription>
+              {currentStep === 1 && "Tell us about yourself"}
+              {currentStep === 2 && "Upload your resume (optional)"}
+              {currentStep === 3 && "Share your motivation for joining"}
             </CardDescription>
           </CardHeader>
           <CardContent>
-            <form onSubmit={handleSubmit} className="space-y-8">
-              {/* Step 1: Personal Information */}
-              <div className={`space-y-6 ${currentStep === 1 ? 'block' : 'hidden'}`}>
-                <div className="text-center mb-6">
-                  <div className="w-16 h-16 bg-gradient-to-br from-blue-500 to-blue-600 rounded-full flex items-center justify-center mx-auto mb-4">
-                    <User className="w-8 h-8 text-white" />
+            <form onSubmit={handleSubmit} className="space-y-6">
+              {currentStep === 1 && (
+                <div className="space-y-4">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div className="space-y-2">
+                      <Label htmlFor="fullName">Full Name *</Label>
+                      <Input
+                        id="fullName"
+                        name="fullName"
+                        value={formData.fullName}
+                        onChange={handleInputChange}
+                        placeholder="Enter your full name"
+                        required
+                        className="w-full"
+                      />
+                    </div>
+                    <div className="space-y-2">
+                      <Label htmlFor="email">Email *</Label>
+                      <Input
+                        id="email"
+                        name="email"
+                        type="email"
+                        value={formData.email}
+                        onChange={handleInputChange}
+                        placeholder="Enter your email"
+                        required
+                        className="w-full"
+                      />
+                    </div>
                   </div>
-                  <h3 className="text-xl font-semibold text-gray-900 mb-2">Personal Information</h3>
-                  <p className="text-gray-600">Let's start with your basic details</p>
-                </div>
-
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div className="space-y-2">
-                    <Label htmlFor="fullName" className="text-sm font-medium">Full Name *</Label>
+                    <Label htmlFor="phoneNumber">Phone Number *</Label>
                     <Input
-                      id="fullName"
-                      name="fullName"
-                      type="text"
-                      placeholder="Your full name"
-                      value={formData.fullName}
+                      id="phoneNumber"
+                      name="phoneNumber"
+                      value={formData.phoneNumber}
                       onChange={handleInputChange}
-                      className="h-12 border-2 focus:border-primary transition-colors"
+                      placeholder="Enter your phone number"
                       required
+                      className="w-full"
                     />
                   </div>
+                </div>
+              )}
+
+              {currentStep === 2 && (
+                <div className="space-y-4">
                   <div className="space-y-2">
-                    <Label htmlFor="email" className="text-sm font-medium">Email *</Label>
-                    <Input
-                      id="email"
-                      name="email"
-                      type="email"
-                      placeholder="your@email.com"
-                      value={formData.email}
-                      onChange={handleInputChange}
-                      className="h-12 border-2 focus:border-primary transition-colors"
-                      required
-                    />
-                  </div>
-                </div>
-
-                <div className="space-y-2">
-                  <Label htmlFor="phoneNumber" className="text-sm font-medium">Phone Number *</Label>
-                  <Input
-                    id="phoneNumber"
-                    name="phoneNumber"
-                    type="tel"
-                    placeholder="+91 12345 67890"
-                    value={formData.phoneNumber}
-                    onChange={handleInputChange}
-                    className="h-12 border-2 focus:border-primary transition-colors"
-                    required
-                  />
-                </div>
-
-                <div className="flex justify-end">
-                  <Button 
-                    type="button" 
-                    onClick={() => setCurrentStep(2)}
-                    disabled={!formData.fullName || !formData.email || !formData.phoneNumber}
-                    className="bg-gradient-to-r from-primary to-primary/80 hover:from-primary/90 hover:to-primary/70"
-                  >
-                    Next Step
-                    <ArrowLeft className="w-4 h-4 ml-2 rotate-180" />
-                  </Button>
-                </div>
-              </div>
-
-              {/* Step 2: Resume Upload */}
-              <div className={`space-y-6 ${currentStep === 2 ? 'block' : 'hidden'}`}>
-                <div className="text-center mb-6">
-                  <div className="w-16 h-16 bg-gradient-to-br from-green-500 to-green-600 rounded-full flex items-center justify-center mx-auto mb-4">
-                    <FileText className="w-8 h-8 text-white" />
-                  </div>
-                  <h3 className="text-xl font-semibold text-gray-900 mb-2">Resume Upload</h3>
-                  <p className="text-gray-600">Upload your resume to showcase your experience</p>
-                </div>
-
-                <div className="space-y-2">
-                  <Label htmlFor="resume" className="text-sm font-medium">Resume Upload (Optional)</Label>
-                  <div className="border-2 border-dashed border-gray-300 rounded-xl p-8 text-center hover:border-primary transition-colors group">
-                    <input
-                      id="resume"
-                      type="file"
-                      accept=".pdf,.doc,.docx"
-                      onChange={handleFileChange}
-                      className="hidden"
-                    />
-                    <label htmlFor="resume" className="cursor-pointer">
-                      <div className="w-16 h-16 bg-gradient-to-br from-gray-100 to-gray-200 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:from-primary/10 group-hover:to-primary/20 transition-colors">
-                        <Upload className="w-8 h-8 text-gray-400 group-hover:text-primary transition-colors" />
-                      </div>
-                      <p className="text-lg font-medium text-gray-900 mb-2">
-                        {resumeFile ? resumeFile.name : "Click to upload your resume"}
-                      </p>
+                    <Label htmlFor="resume">Resume (Optional)</Label>
+                    <div className="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center hover:border-primary/50 transition-colors">
+                      <Upload className="w-8 h-8 text-gray-400 mx-auto mb-2" />
                       <p className="text-sm text-gray-600 mb-2">
+                        {resumeFile ? resumeFile.name : "Click to upload or drag and drop"}
+                      </p>
+                      <p className="text-xs text-gray-500 mb-4">
                         PDF, DOC, or DOCX (max 5MB)
                       </p>
-                      {resumeFile && (
-                        <Badge className="bg-green-100 text-green-800 border-green-200">
-                          <CheckCircle className="w-3 h-3 mr-1" />
-                          File Selected
-                        </Badge>
-                      )}
-                    </label>
+                      <Input
+                        id="resume"
+                        type="file"
+                        accept=".pdf,.doc,.docx"
+                        onChange={handleFileChange}
+                        className="hidden"
+                      />
+                      <Button
+                        type="button"
+                        variant="outline"
+                        onClick={() => document.getElementById('resume')?.click()}
+                        className="w-full sm:w-auto"
+                      >
+                        <Upload className="w-4 h-4 mr-2" />
+                        Choose File
+                      </Button>
+                    </div>
+                    {resumeFile && (
+                      <div className="flex items-center justify-between p-3 bg-green-50 rounded-lg">
+                        <div className="flex items-center space-x-2">
+                          <FileText className="w-4 h-4 text-green-600" />
+                          <span className="text-sm text-green-800">{resumeFile.name}</span>
+                        </div>
+                        <Button
+                          type="button"
+                          variant="ghost"
+                          size="sm"
+                          onClick={() => setResumeFile(null)}
+                          className="text-red-600 hover:text-red-700"
+                        >
+                          Remove
+                        </Button>
+                      </div>
+                    )}
                   </div>
                 </div>
+              )}
 
-                <div className="flex justify-between">
-                  <Button 
-                    type="button" 
-                    variant="outline"
-                    onClick={() => setCurrentStep(1)}
-                    className="border-2 hover:bg-gray-50"
-                  >
-                    <ArrowLeft className="w-4 h-4 mr-2" />
-                    Previous
-                  </Button>
-                  <Button 
-                    type="button" 
-                    onClick={() => setCurrentStep(3)}
-                    className="bg-gradient-to-r from-primary to-primary/80 hover:from-primary/90 hover:to-primary/70"
-                  >
-                    Next Step
-                    <ArrowLeft className="w-4 h-4 ml-2 rotate-180" />
-                  </Button>
-                </div>
-              </div>
-
-              {/* Step 3: Motivation */}
-              <div className={`space-y-6 ${currentStep === 3 ? 'block' : 'hidden'}`}>
-                <div className="text-center mb-6">
-                  <div className="w-16 h-16 bg-gradient-to-br from-purple-500 to-purple-600 rounded-full flex items-center justify-center mx-auto mb-4">
-                    <MessageSquare className="w-8 h-8 text-white" />
+              {currentStep === 3 && (
+                <div className="space-y-4">
+                  <div className="space-y-2">
+                    <Label htmlFor="motivation">Motivation Statement *</Label>
+                    <Textarea
+                      id="motivation"
+                      name="motivation"
+                      value={formData.motivation}
+                      onChange={handleInputChange}
+                      placeholder="Tell us why you want to join our internship program and what you hope to achieve..."
+                      required
+                      className="min-h-[120px] sm:min-h-[150px] resize-none"
+                    />
+                    <p className="text-xs text-gray-500">
+                      Share your motivation, goals, and what you hope to learn from this experience.
+                    </p>
                   </div>
-                  <h3 className="text-xl font-semibold text-gray-900 mb-2">Tell Us Your Story</h3>
-                  <p className="text-gray-600">Share your motivation and goals</p>
                 </div>
+              )}
 
-                <div className="space-y-2">
-                  <Label htmlFor="motivation" className="text-sm font-medium">Why do you want to join? *</Label>
-                  <Textarea
-                    id="motivation"
-                    name="motivation"
-                    placeholder="Tell us about your motivation to join our NGO and how you plan to contribute to our mission..."
-                    value={formData.motivation}
-                    onChange={handleInputChange}
-                    rows={8}
-                    className="border-2 focus:border-primary transition-colors resize-none"
-                    required
-                  />
-                  <p className="text-xs text-gray-500">
-                    Minimum 100 characters. Be specific about your goals and how you can contribute.
-                  </p>
-                </div>
-
-                <div className="flex gap-4">
-                  <Button 
-                    type="button" 
+              {/* Navigation Buttons */}
+              <div className="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-2 pt-4">
+                {currentStep > 1 && (
+                  <Button
+                    type="button"
                     variant="outline"
-                    onClick={() => setCurrentStep(2)}
-                    className="flex-1 border-2 hover:bg-gray-50"
+                    onClick={() => setCurrentStep(currentStep - 1)}
+                    className="w-full sm:w-auto"
                   >
-                    <ArrowLeft className="w-4 h-4 mr-2" />
                     Previous
                   </Button>
-                  <Button 
-                    type="submit" 
-                    disabled={isSubmitting || !formData.motivation || formData.motivation.length < 100}
-                    className="flex-1 bg-gradient-to-r from-primary to-primary/80 hover:from-primary/90 hover:to-primary/70"
+                )}
+                
+                {currentStep < 3 ? (
+                  <Button
+                    type="button"
+                    onClick={() => setCurrentStep(currentStep + 1)}
+                    className="w-full sm:w-auto bg-gradient-to-r from-primary to-primary/80 hover:from-primary/90 hover:to-primary/70"
                   >
-                    {isSubmitting && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
-                    Submit Application
+                    Next
                   </Button>
-                </div>
+                ) : (
+                  <Button
+                    type="submit"
+                    disabled={isSubmitting}
+                    className="w-full sm:w-auto bg-gradient-to-r from-primary to-primary/80 hover:from-primary/90 hover:to-primary/70"
+                  >
+                    {isSubmitting ? (
+                      <>
+                        <Loader2 className="w-4 h-4 mr-2 animate-spin" />
+                        Submitting...
+                      </>
+                    ) : (
+                      <>
+                        <Sparkles className="w-4 h-4 mr-2" />
+                        Submit Application
+                      </>
+                    )}
+                  </Button>
+                )}
               </div>
             </form>
           </CardContent>

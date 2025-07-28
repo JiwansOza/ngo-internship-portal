@@ -89,17 +89,17 @@ export default function AuthPage() {
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-green-50 via-blue-50 to-purple-50 p-4">
-      <div className="w-full max-w-md">
-        <div className="text-center mb-8">
-          <div className="flex items-center justify-center mb-6">
+      <div className="w-full max-w-sm sm:max-w-md">
+        <div className="text-center mb-6 sm:mb-8">
+          <div className="flex items-center justify-center mb-4 sm:mb-6">
             <div className="relative">
-              <Users className="h-12 w-12 text-primary mr-3" />
-              <Sparkles className="h-6 w-6 text-primary/60 animate-ping absolute -top-2 -right-2" />
+              <Users className="h-10 w-10 sm:h-12 sm:w-12 text-primary mr-2 sm:mr-3" />
+              <Sparkles className="h-5 w-5 sm:h-6 sm:w-6 text-primary/60 animate-ping absolute -top-1 -right-1 sm:-top-2 sm:-right-2" />
             </div>
-            <h1 className="text-3xl font-bold text-primary">NGO Internship Portal</h1>
+            <h1 className="text-2xl sm:text-3xl font-bold text-primary">NGO Internship Portal</h1>
           </div>
-          <p className="text-gray-600 mb-4">Join our mission to make a difference</p>
-          <div className="flex items-center justify-center space-x-4">
+          <p className="text-sm sm:text-base text-gray-600 mb-3 sm:mb-4">Join our mission to make a difference</p>
+          <div className="flex flex-col sm:flex-row items-center justify-center space-y-2 sm:space-y-0 sm:space-x-4">
             <Badge className="bg-primary/10 text-primary border-primary/20">
               <Star className="w-3 h-3 mr-1" />
               500+ Interns
@@ -113,28 +113,28 @@ export default function AuthPage() {
 
         <Card className="shadow-2xl border-0 bg-white/80 backdrop-blur-sm">
           <CardHeader className="text-center">
-            <CardTitle className="text-2xl flex items-center justify-center">
-              <div className="w-10 h-10 bg-gradient-to-br from-primary to-primary/80 rounded-xl flex items-center justify-center mr-3">
-                <Shield className="w-5 h-5 text-white" />
+            <CardTitle className="text-xl sm:text-2xl flex items-center justify-center">
+              <div className="w-8 h-8 sm:w-10 sm:h-10 bg-gradient-to-br from-primary to-primary/80 rounded-xl flex items-center justify-center mr-2 sm:mr-3">
+                <Shield className="w-4 h-4 sm:w-5 sm:h-5 text-white" />
               </div>
               Welcome
             </CardTitle>
-            <CardDescription className="text-lg">
+            <CardDescription className="text-base sm:text-lg">
               Sign in to your account or create a new one
             </CardDescription>
           </CardHeader>
           <CardContent>
             <Tabs defaultValue="signin" className="w-full">
               <TabsList className="grid w-full grid-cols-2 bg-gray-100 p-1 rounded-xl">
-                <TabsTrigger value="signin" className="rounded-lg data-[state=active]:bg-white data-[state=active]:shadow-sm transition-all duration-200">
+                <TabsTrigger value="signin" className="rounded-lg data-[state=active]:bg-white data-[state=active]:shadow-sm transition-all duration-200 text-sm">
                   Sign In
                 </TabsTrigger>
-                <TabsTrigger value="signup" className="rounded-lg data-[state=active]:bg-white data-[state=active]:shadow-sm transition-all duration-200">
+                <TabsTrigger value="signup" className="rounded-lg data-[state=active]:bg-white data-[state=active]:shadow-sm transition-all duration-200 text-sm">
                   Sign Up
                 </TabsTrigger>
               </TabsList>
               
-              <TabsContent value="signin" className="mt-6">
+              <TabsContent value="signin" className="mt-4 sm:mt-6">
                 <form onSubmit={handleSignIn} className="space-y-4">
                   <div className="space-y-2">
                     <Label htmlFor="email" className="text-sm font-medium">Email</Label>
@@ -146,7 +146,7 @@ export default function AuthPage() {
                         placeholder="your@email.com"
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
-                        className="pl-10 h-12 border-2 focus:border-primary transition-colors"
+                        className="pl-10 h-11 sm:h-12 border-2 focus:border-primary transition-colors"
                         required
                       />
                     </div>
@@ -161,19 +161,19 @@ export default function AuthPage() {
                         placeholder="Enter your password"
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
-                        className="pl-10 h-12 border-2 focus:border-primary transition-colors"
+                        className="pl-10 h-11 sm:h-12 border-2 focus:border-primary transition-colors"
                         required
                       />
                     </div>
                   </div>
-                  <Button type="submit" className="w-full h-12 bg-gradient-to-r from-primary to-primary/80 hover:from-primary/90 hover:to-primary/70 shadow-lg hover:shadow-xl transition-all duration-300" disabled={isLoading}>
+                  <Button type="submit" className="w-full h-11 sm:h-12 bg-gradient-to-r from-primary to-primary/80 hover:from-primary/90 hover:to-primary/70 shadow-lg hover:shadow-xl transition-all duration-300" disabled={isLoading}>
                     {isLoading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
                     Sign In
                   </Button>
                 </form>
               </TabsContent>
               
-              <TabsContent value="signup" className="mt-6">
+              <TabsContent value="signup" className="mt-4 sm:mt-6">
                 <form onSubmit={handleSignUp} className="space-y-4">
                   <div className="space-y-2">
                     <Label htmlFor="fullName" className="text-sm font-medium">Full Name</Label>
@@ -185,7 +185,7 @@ export default function AuthPage() {
                         placeholder="Your full name"
                         value={fullName}
                         onChange={(e) => setFullName(e.target.value)}
-                        className="pl-10 h-12 border-2 focus:border-primary transition-colors"
+                        className="pl-10 h-11 sm:h-12 border-2 focus:border-primary transition-colors"
                         required
                       />
                     </div>
@@ -200,7 +200,7 @@ export default function AuthPage() {
                         placeholder="your@email.com"
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
-                        className="pl-10 h-12 border-2 focus:border-primary transition-colors"
+                        className="pl-10 h-11 sm:h-12 border-2 focus:border-primary transition-colors"
                         required
                       />
                     </div>
@@ -215,14 +215,14 @@ export default function AuthPage() {
                         placeholder="Create a password"
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
-                        className="pl-10 h-12 border-2 focus:border-primary transition-colors"
+                        className="pl-10 h-11 sm:h-12 border-2 focus:border-primary transition-colors"
                         required
                         minLength={6}
                       />
                     </div>
                     <p className="text-xs text-gray-500">Minimum 6 characters</p>
                   </div>
-                  <Button type="submit" className="w-full h-12 bg-gradient-to-r from-primary to-primary/80 hover:from-primary/90 hover:to-primary/70 shadow-lg hover:shadow-xl transition-all duration-300" disabled={isLoading}>
+                  <Button type="submit" className="w-full h-11 sm:h-12 bg-gradient-to-r from-primary to-primary/80 hover:from-primary/90 hover:to-primary/70 shadow-lg hover:shadow-xl transition-all duration-300" disabled={isLoading}>
                     {isLoading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
                     Create Account
                   </Button>
@@ -231,18 +231,18 @@ export default function AuthPage() {
             </Tabs>
 
             {/* Features */}
-            <div className="mt-8 pt-6 border-t border-gray-200">
+            <div className="mt-6 sm:mt-8 pt-4 sm:pt-6 border-t border-gray-200">
               <div className="grid grid-cols-1 gap-3">
                 <div className="flex items-center space-x-3 p-3 bg-green-50 rounded-lg">
-                  <CheckCircle className="w-4 h-4 text-green-600" />
+                  <CheckCircle className="w-4 h-4 text-green-600 flex-shrink-0" />
                   <span className="text-sm text-green-700">Free to join</span>
                 </div>
                 <div className="flex items-center space-x-3 p-3 bg-blue-50 rounded-lg">
-                  <Shield className="w-4 h-4 text-blue-600" />
+                  <Shield className="w-4 h-4 text-blue-600 flex-shrink-0" />
                   <span className="text-sm text-blue-700">Secure & private</span>
                 </div>
                 <div className="flex items-center space-x-3 p-3 bg-purple-50 rounded-lg">
-                  <Star className="w-4 h-4 text-purple-600" />
+                  <Star className="w-4 h-4 text-purple-600 flex-shrink-0" />
                   <span className="text-sm text-purple-700">Earn certificates</span>
                 </div>
               </div>

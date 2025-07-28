@@ -69,11 +69,8 @@ export default function AdminFundraising() {
     return (
       <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-green-50 to-blue-50">
         <div className="text-center">
-          <div className="relative">
-            <Users className="h-12 w-12 text-primary mx-auto animate-pulse mb-4" />
-            <Sparkles className="h-6 w-6 text-primary/60 animate-ping absolute -top-2 -right-2" />
-          </div>
-          <p className="text-gray-600 font-medium">Loading fundraising data...</p>
+          <div className="w-8 h-8 sm:w-12 sm:h-12 border-4 border-primary border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
+          <p className="text-sm sm:text-base text-gray-600">Loading fundraising data...</p>
         </div>
       </div>
     );
@@ -90,104 +87,92 @@ export default function AdminFundraising() {
                 variant="ghost"
                 size="sm"
                 onClick={() => navigate("/dashboard")}
-                className="mr-4 hover:bg-primary/5"
+                className="mr-2 sm:mr-4 hover:bg-primary/5 p-2 sm:px-3"
               >
-                <ArrowLeft className="w-4 h-4 mr-2" />
-                Back to Dashboard
+                <ArrowLeft className="w-4 h-4 sm:mr-2" />
+                <span className="hidden sm:inline">Back to Dashboard</span>
               </Button>
               <div className="relative">
-                <Users className="h-8 w-8 text-primary mr-3" />
-                <Sparkles className="h-4 w-4 text-primary/60 animate-ping absolute -top-1 -right-1" />
+                <Users className="h-6 w-6 sm:h-8 sm:w-8 text-primary mr-2 sm:mr-3" />
+                <Sparkles className="h-3 w-3 sm:h-4 sm:w-4 text-primary/60 animate-ping absolute -top-1 -right-1" />
               </div>
-              <h1 className="text-xl font-semibold text-gray-900">Fundraising Admin</h1>
+              <h1 className="text-base sm:text-xl font-semibold text-gray-900">Admin Dashboard</h1>
             </div>
-            <Button onClick={handleExportCSV} className="bg-gradient-to-r from-primary to-primary/80 hover:from-primary/90 hover:to-primary/70">
+            <Button
+              onClick={handleExportCSV}
+              className="bg-gradient-to-r from-primary to-primary/80 hover:from-primary/90 hover:to-primary/70"
+            >
               <Download className="w-4 h-4 mr-2" />
-              Export CSV
+              <span className="hidden sm:inline">Export CSV</span>
             </Button>
           </div>
         </div>
       </header>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        {/* Stats Overview */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
+        {/* Header Section */}
+        <div className="mb-6 sm:mb-8">
+          <div className="flex items-center space-x-3 mb-2">
+            <div className="w-2 h-2 bg-primary rounded-full animate-pulse"></div>
+            <h2 className="text-xl sm:text-2xl font-bold text-gray-900">Fundraising Overview</h2>
+          </div>
+          <p className="text-sm sm:text-base text-gray-600">Monitor all fundraising activities and progress</p>
+        </div>
+
+        {/* Stats Cards */}
         {stats && (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6 mb-8">
-            <Card className="shadow-lg border-0 bg-white/80 backdrop-blur-sm">
-              <CardContent className="p-6">
-                <div className="flex items-center space-x-2">
-                  <div className="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center">
-                    <TrendingUp className="w-5 h-5 text-green-600" />
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 mb-6 sm:mb-8">
+            <Card className="shadow-lg border-0 bg-white/80 backdrop-blur-sm hover:shadow-xl transition-all duration-300">
+              <CardContent className="p-4 sm:p-6">
+                <div className="flex items-center space-x-3">
+                  <div className="w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-br from-blue-500 to-blue-600 rounded-xl flex items-center justify-center">
+                    <Users className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
                   </div>
                   <div>
-                    <p className="text-sm text-gray-600">Total Raised</p>
-                    <p className="text-2xl font-bold text-green-600">
-                      ₹{stats.total_raised.toLocaleString()}
-                    </p>
+                    <p className="text-xs sm:text-sm text-gray-600">Total Fundraisers</p>
+                    <p className="text-lg sm:text-2xl font-bold text-blue-600">{stats.totalFundraisers}</p>
                   </div>
                 </div>
               </CardContent>
             </Card>
 
-            <Card className="shadow-lg border-0 bg-white/80 backdrop-blur-sm">
-              <CardContent className="p-6">
-                <div className="flex items-center space-x-2">
-                  <div className="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center">
-                    <Users className="w-5 h-5 text-blue-600" />
+            <Card className="shadow-lg border-0 bg-white/80 backdrop-blur-sm hover:shadow-xl transition-all duration-300">
+              <CardContent className="p-4 sm:p-6">
+                <div className="flex items-center space-x-3">
+                  <div className="w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-br from-green-500 to-green-600 rounded-xl flex items-center justify-center">
+                    <TrendingUp className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
                   </div>
                   <div>
-                    <p className="text-sm text-gray-600">Fundraisers</p>
-                    <p className="text-2xl font-bold text-blue-600">
-                      {stats.total_fundraisers}
-                    </p>
+                    <p className="text-xs sm:text-sm text-gray-600">Total Raised</p>
+                    <p className="text-lg sm:text-2xl font-bold text-green-600">₹{stats.totalAmount.toLocaleString()}</p>
                   </div>
                 </div>
               </CardContent>
             </Card>
 
-            <Card className="shadow-lg border-0 bg-white/80 backdrop-blur-sm">
-              <CardContent className="p-6">
-                <div className="flex items-center space-x-2">
-                  <div className="w-10 h-10 bg-purple-100 rounded-full flex items-center justify-center">
-                    <Target className="w-5 h-5 text-purple-600" />
+            <Card className="shadow-lg border-0 bg-white/80 backdrop-blur-sm hover:shadow-xl transition-all duration-300">
+              <CardContent className="p-4 sm:p-6">
+                <div className="flex items-center space-x-3">
+                  <div className="w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-br from-purple-500 to-purple-600 rounded-xl flex items-center justify-center">
+                    <Target className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
                   </div>
                   <div>
-                    <p className="text-sm text-gray-600">Avg Raised</p>
-                    <p className="text-2xl font-bold text-purple-600">
-                      ₹{Math.round(stats.average_raised).toLocaleString()}
-                    </p>
+                    <p className="text-xs sm:text-sm text-gray-600">Average Progress</p>
+                    <p className="text-lg sm:text-2xl font-bold text-purple-600">{Math.round(stats.averageProgress)}%</p>
                   </div>
                 </div>
               </CardContent>
             </Card>
 
-            <Card className="shadow-lg border-0 bg-white/80 backdrop-blur-sm">
-              <CardContent className="p-6">
-                <div className="flex items-center space-x-2">
-                  <div className="w-10 h-10 bg-yellow-100 rounded-full flex items-center justify-center">
-                    <Star className="w-5 h-5 text-yellow-600" />
+            <Card className="shadow-lg border-0 bg-white/80 backdrop-blur-sm hover:shadow-xl transition-all duration-300">
+              <CardContent className="p-4 sm:p-6">
+                <div className="flex items-center space-x-3">
+                  <div className="w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-br from-yellow-500 to-yellow-600 rounded-xl flex items-center justify-center">
+                    <Star className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
                   </div>
                   <div>
-                    <p className="text-sm text-gray-600">Avg Target</p>
-                    <p className="text-2xl font-bold text-yellow-600">
-                      ₹{Math.round(stats.average_target).toLocaleString()}
-                    </p>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-
-            <Card className="shadow-lg border-0 bg-white/80 backdrop-blur-sm">
-              <CardContent className="p-6">
-                <div className="flex items-center space-x-2">
-                  <div className="w-10 h-10 bg-orange-100 rounded-full flex items-center justify-center">
-                    <TrendingUp className="w-5 h-5 text-orange-600" />
-                  </div>
-                  <div>
-                    <p className="text-sm text-gray-600">Completion Rate</p>
-                    <p className="text-2xl font-bold text-orange-600">
-                      {stats.completion_rate.toFixed(1)}%
-                    </p>
+                    <p className="text-xs sm:text-sm text-gray-600">Top Fundraiser</p>
+                    <p className="text-lg sm:text-2xl font-bold text-yellow-600">₹{stats.topAmount.toLocaleString()}</p>
                   </div>
                 </div>
               </CardContent>
@@ -195,103 +180,63 @@ export default function AdminFundraising() {
           </div>
         )}
 
-        {/* Fundraising Data Table */}
-        <Card className="shadow-lg border-0 bg-white/80 backdrop-blur-sm">
+        {/* Fundraising List */}
+        <Card className="shadow-xl border-0 bg-white/80 backdrop-blur-sm">
           <CardHeader>
             <CardTitle className="flex items-center">
-              <div className="w-10 h-10 bg-gradient-to-br from-primary to-primary/80 rounded-xl flex items-center justify-center mr-3">
-                <Users className="w-5 h-5 text-white" />
+              <div className="w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-br from-primary to-primary/80 rounded-xl flex items-center justify-center mr-3">
+                <TrendingUp className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
               </div>
-              Fundraising Data
+              Fundraising Progress
             </CardTitle>
-            <CardDescription>
-              Complete list of all fundraising progress ({fundraisingData.length} fundraisers)
-            </CardDescription>
+            <CardDescription>All active fundraising campaigns</CardDescription>
           </CardHeader>
           <CardContent>
-            <div className="overflow-x-auto">
-              <table className="w-full">
-                <thead>
-                  <tr className="border-b border-gray-200">
-                    <th className="text-left py-3 px-4 font-medium text-gray-700">Rank</th>
-                    <th className="text-left py-3 px-4 font-medium text-gray-700">Name</th>
-                    <th className="text-left py-3 px-4 font-medium text-gray-700">Email</th>
-                    <th className="text-left py-3 px-4 font-medium text-gray-700">Target</th>
-                    <th className="text-left py-3 px-4 font-medium text-gray-700">Collected</th>
-                    <th className="text-left py-3 px-4 font-medium text-gray-700">Progress</th>
-                    <th className="text-left py-3 px-4 font-medium text-gray-700">Status</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {fundraisingData.map((item, index) => {
-                    const progress = (item.collected_amount / item.target_amount) * 100;
-                    const isCurrentUser = item.user_id === user?.id;
-                    
-                    return (
-                      <tr key={item.id} className={`border-b border-gray-100 hover:bg-gray-50 ${isCurrentUser ? 'bg-primary/5' : ''}`}>
-                        <td className="py-3 px-4">
-                          <div className="flex items-center space-x-2">
-                            <span className="font-medium">#{index + 1}</span>
-                            {isCurrentUser && (
-                              <Badge variant="secondary" className="text-xs">You</Badge>
-                            )}
-                          </div>
-                        </td>
-                        <td className="py-3 px-4">
-                          <span className="font-medium">
-                            {item.profiles?.full_name || 'Anonymous'}
-                          </span>
-                        </td>
-                        <td className="py-3 px-4 text-gray-600">
-                          {item.profiles?.email || 'N/A'}
-                        </td>
-                        <td className="py-3 px-4">
-                          ₹{item.target_amount.toLocaleString()}
-                        </td>
-                        <td className="py-3 px-4 font-medium">
-                          ₹{item.collected_amount.toLocaleString()}
-                        </td>
-                        <td className="py-3 px-4">
-                          <div className="flex items-center space-x-2">
-                            <div className="w-16 bg-gray-200 rounded-full h-2">
-                              <div 
-                                className="bg-primary h-2 rounded-full" 
-                                style={{ width: `${Math.min(progress, 100)}%` }}
-                              ></div>
-                            </div>
-                            <span className="text-sm text-gray-600">
-                              {progress.toFixed(1)}%
-                            </span>
-                          </div>
-                        </td>
-                        <td className="py-3 px-4">
-                          {progress >= 100 ? (
-                            <Badge className="bg-green-100 text-green-800 border-green-200">
-                              Completed
-                            </Badge>
-                          ) : progress >= 75 ? (
-                            <Badge className="bg-blue-100 text-blue-800 border-blue-200">
-                              Excellent
-                            </Badge>
-                          ) : progress >= 50 ? (
-                            <Badge className="bg-yellow-100 text-yellow-800 border-yellow-200">
-                              Good
-                            </Badge>
-                          ) : progress >= 25 ? (
-                            <Badge className="bg-orange-100 text-orange-800 border-orange-200">
-                              Fair
-                            </Badge>
-                          ) : (
-                            <Badge className="bg-red-100 text-red-800 border-red-200">
-                              Needs Work
-                            </Badge>
-                          )}
-                        </td>
-                      </tr>
-                    );
-                  })}
-                </tbody>
-              </table>
+            <div className="space-y-4">
+              {fundraisingData.map((item, index) => (
+                <div key={item.id} className="flex flex-col sm:flex-row sm:items-center sm:justify-between p-4 rounded-xl border border-gray-200 hover:border-primary/30 transition-all duration-200 space-y-3 sm:space-y-0">
+                  <div className="flex items-center space-x-3">
+                    <div className="w-8 h-8 sm:w-10 sm:h-10 bg-gradient-to-br from-gray-100 to-gray-200 rounded-full flex items-center justify-center">
+                      <span className="text-sm sm:text-base font-bold text-gray-600">{index + 1}</span>
+                    </div>
+                    <div>
+                      <h4 className="font-medium text-sm sm:text-base text-gray-900">
+                        {item.profiles?.full_name || `Fundraiser ${index + 1}`}
+                      </h4>
+                      <p className="text-xs sm:text-sm text-gray-500">
+                        {item.affiliate_links?.title || "NGO Internship Fundraising"}
+                      </p>
+                    </div>
+                  </div>
+                  <div className="flex flex-col sm:flex-row sm:items-center space-y-2 sm:space-y-0 sm:space-x-4">
+                    <div className="text-right">
+                      <div className="text-lg sm:text-xl font-bold text-primary">
+                        ₹{item.collected_amount.toLocaleString()}
+                      </div>
+                      <div className="text-xs sm:text-sm text-gray-500">
+                        of ₹{item.target_amount.toLocaleString()}
+                      </div>
+                    </div>
+                    <div className="flex items-center space-x-2">
+                      <div className="w-20 sm:w-24 h-2 bg-gray-200 rounded-full overflow-hidden">
+                        <div 
+                          className="h-full bg-gradient-to-r from-primary to-primary/80 rounded-full transition-all duration-300"
+                          style={{ width: `${Math.min((item.collected_amount / item.target_amount) * 100, 100)}%` }}
+                        ></div>
+                      </div>
+                      <Badge className={`text-xs ${
+                        (item.collected_amount / item.target_amount) * 100 >= 100 
+                          ? 'bg-green-100 text-green-800 border-green-200' 
+                          : (item.collected_amount / item.target_amount) * 100 >= 50 
+                            ? 'bg-yellow-100 text-yellow-800 border-yellow-200' 
+                            : 'bg-red-100 text-red-800 border-red-200'
+                      }`}>
+                        {Math.round((item.collected_amount / item.target_amount) * 100)}%
+                      </Badge>
+                    </div>
+                  </div>
+                </div>
+              ))}
             </div>
           </CardContent>
         </Card>

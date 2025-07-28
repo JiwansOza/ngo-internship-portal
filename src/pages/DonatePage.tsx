@@ -100,11 +100,8 @@ export default function DonatePage() {
     return (
       <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-green-50 to-blue-50">
         <div className="text-center">
-          <div className="relative">
-            <Heart className="h-12 w-12 text-primary mx-auto animate-pulse mb-4" />
-            <Sparkles className="h-6 w-6 text-primary/60 animate-ping absolute -top-2 -right-2" />
-          </div>
-          <p className="text-gray-600 font-medium">Loading donation page...</p>
+          <div className="w-8 h-8 sm:w-12 sm:h-12 border-4 border-primary border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
+          <p className="text-sm sm:text-base text-gray-600">Loading donation page...</p>
         </div>
       </div>
     );
@@ -114,11 +111,11 @@ export default function DonatePage() {
     return (
       <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-green-50 to-blue-50">
         <div className="text-center">
-          <div className="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4">
-            <Heart className="w-8 h-8 text-gray-400" />
+          <div className="w-16 h-16 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-4">
+            <Heart className="w-8 h-8 text-red-600" />
           </div>
-          <h2 className="text-xl font-semibold text-gray-900 mb-2">Link Not Found</h2>
-          <p className="text-gray-600 mb-4">This fundraising link is no longer available.</p>
+          <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-2">Link Not Found</h2>
+          <p className="text-sm sm:text-base text-gray-600 mb-4">This donation link is invalid or has expired.</p>
           <Button onClick={() => navigate("/")} className="bg-gradient-to-r from-primary to-primary/80 hover:from-primary/90 hover:to-primary/70">
             <ArrowLeft className="w-4 h-4 mr-2" />
             Go Home
@@ -146,102 +143,76 @@ export default function DonatePage() {
                 variant="ghost"
                 size="sm"
                 onClick={() => navigate("/")}
-                className="mr-4 hover:bg-primary/5"
+                className="mr-2 sm:mr-4 hover:bg-primary/5 p-2 sm:px-3"
               >
-                <ArrowLeft className="w-4 h-4 mr-2" />
-                Back to Home
+                <ArrowLeft className="w-4 h-4 sm:mr-2" />
+                <span className="hidden sm:inline">Back to Home</span>
               </Button>
               <div className="relative">
-                <Heart className="h-8 w-8 text-primary mr-3" />
-                <Sparkles className="h-4 w-4 text-primary/60 animate-ping absolute -top-1 -right-1" />
+                <Heart className="h-6 w-6 sm:h-8 sm:w-8 text-primary mr-2 sm:mr-3" />
+                <Sparkles className="h-3 w-3 sm:h-4 sm:w-4 text-primary/60 animate-ping absolute -top-1 -right-1" />
               </div>
-              <h1 className="text-xl font-semibold text-gray-900">Support Fundraising</h1>
+              <h1 className="text-base sm:text-xl font-semibold text-gray-900">Donate</h1>
             </div>
           </div>
         </div>
       </header>
 
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8">
           {/* Campaign Info */}
-          <div className="space-y-6">
-            <Card className="shadow-lg border-0 bg-white/80 backdrop-blur-sm">
+          <div className="space-y-6 sm:space-y-8">
+            <Card className="shadow-xl border-0 bg-white/80 backdrop-blur-sm hover:shadow-2xl transition-all duration-300">
               <CardHeader>
                 <CardTitle className="flex items-center">
-                  <div className="w-10 h-10 bg-gradient-to-br from-primary to-primary/80 rounded-xl flex items-center justify-center mr-3">
-                    <Heart className="w-5 h-5 text-white" />
+                  <div className="w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-br from-red-500 to-red-600 rounded-xl flex items-center justify-center mr-3">
+                    <Heart className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
                   </div>
                   {affiliateLink.title}
                 </CardTitle>
-                <CardDescription>
-                  by {affiliateLink.profiles?.full_name || 'Anonymous'}
-                </CardDescription>
+                <CardDescription>{affiliateLink.description}</CardDescription>
               </CardHeader>
-              <CardContent className="space-y-4">
-                {affiliateLink.description && (
-                  <p className="text-gray-600">{affiliateLink.description}</p>
-                )}
-                
-                <div className="space-y-3">
-                  <div className="flex items-center justify-between">
-                    <span className="text-sm font-medium text-gray-700">Progress</span>
-                    <span className="text-sm font-bold text-primary">{progress.toFixed(1)}%</span>
+              <CardContent>
+                <div className="space-y-4">
+                  <div className="text-center">
+                    <div className="text-2xl sm:text-3xl font-bold text-primary mb-1">
+                      ₹{formatAmount(affiliateLink.fundraising_progress?.collected_amount || 0)}
+                    </div>
+                    <div className="text-xs sm:text-sm text-gray-600">
+                      of ₹{formatAmount(affiliateLink.target_amount)} goal
+                    </div>
                   </div>
-                  <Progress value={progress} className="h-3" />
-                  <div className="grid grid-cols-2 gap-4">
-                    <div className="text-center p-4 bg-gray-50 rounded-lg">
-                      <div className="text-2xl font-bold text-green-600">
-                        {formatAmount(affiliateLink.fundraising_progress?.collected_amount || 0)}
-                      </div>
-                      <div className="text-sm text-gray-600">Raised</div>
-                    </div>
-                    <div className="text-center p-4 bg-gray-50 rounded-lg">
-                      <div className="text-2xl font-bold text-blue-600">
-                        {formatAmount(affiliateLink.fundraising_progress?.target_amount || affiliateLink.target_amount)}
-                      </div>
-                      <div className="text-sm text-gray-600">Goal</div>
-                    </div>
+                  <Progress value={calculateProgress(affiliateLink.fundraising_progress?.collected_amount || 0, affiliateLink.target_amount)} className="h-3" />
+                  <div className="text-center text-xs sm:text-sm text-gray-600">
+                    {Math.round(calculateProgress(affiliateLink.fundraising_progress?.collected_amount || 0, affiliateLink.target_amount))}% completed
                   </div>
                 </div>
               </CardContent>
             </Card>
 
             {/* Campaign Stats */}
-            <Card className="shadow-lg border-0 bg-white/80 backdrop-blur-sm">
+            <Card className="shadow-xl border-0 bg-white/80 backdrop-blur-sm">
               <CardHeader>
                 <CardTitle className="flex items-center">
-                  <div className="w-10 h-10 bg-gradient-to-br from-purple-500 to-purple-600 rounded-xl flex items-center justify-center mr-3">
-                    <TrendingUp className="w-5 h-5 text-white" />
+                  <div className="w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-br from-blue-500 to-blue-600 rounded-xl flex items-center justify-center mr-3">
+                    <TrendingUp className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
                   </div>
-                  Campaign Impact
+                  Campaign Stats
                 </CardTitle>
               </CardHeader>
-              <CardContent className="space-y-4">
-                <div className="flex items-center space-x-3">
-                  <div className="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center">
-                    <Users className="w-4 h-4 text-green-600" />
+              <CardContent>
+                <div className="grid grid-cols-2 gap-4">
+                  <div className="text-center p-4 bg-green-50 rounded-lg">
+                    <div className="text-lg sm:text-xl font-bold text-green-600">
+                      {affiliateLink.donations?.length || 0}
+                    </div>
+                    <div className="text-xs sm:text-sm text-green-600">Donations</div>
                   </div>
-                  <div>
-                    <p className="text-sm text-gray-600">Supporting NGO Internship</p>
-                    <p className="font-semibold text-gray-900">Empowering Change</p>
-                  </div>
-                </div>
-                <div className="flex items-center space-x-3">
-                  <div className="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center">
-                    <Target className="w-4 h-4 text-blue-600" />
-                  </div>
-                  <div>
-                    <p className="text-sm text-gray-600">Fundraising Goal</p>
-                    <p className="font-semibold text-gray-900">{formatAmount(affiliateLink.fundraising_progress?.target_amount || affiliateLink.target_amount)}</p>
-                  </div>
-                </div>
-                <div className="flex items-center space-x-3">
-                  <div className="w-8 h-8 bg-purple-100 rounded-full flex items-center justify-center">
-                    <Gift className="w-4 h-4 text-purple-600" />
-                  </div>
-                  <div>
-                    <p className="text-sm text-gray-600">Your Contribution</p>
-                    <p className="font-semibold text-gray-900">Makes a Difference</p>
+                  <div className="text-center p-4 bg-blue-50 rounded-lg">
+                    <div className="text-lg sm:text-xl font-bold text-blue-600">
+                      ₹{formatAmount(affiliateLink.fundraising_progress?.collected_amount || 0)}
+                    </div>
+                    <div className="text-xs sm:text-sm text-blue-600">Raised</div>
                   </div>
                 </div>
               </CardContent>
@@ -249,111 +220,69 @@ export default function DonatePage() {
           </div>
 
           {/* Donation Form */}
-          <div>
-            <Card className="shadow-lg border-0 bg-white/80 backdrop-blur-sm">
+          <div className="space-y-6 sm:space-y-8">
+            <Card className="shadow-xl border-0 bg-white/80 backdrop-blur-sm hover:shadow-2xl transition-all duration-300">
               <CardHeader>
                 <CardTitle className="flex items-center">
-                  <div className="w-10 h-10 bg-gradient-to-br from-green-500 to-green-600 rounded-xl flex items-center justify-center mr-3">
-                    <CreditCard className="w-5 h-5 text-white" />
+                  <div className="w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-br from-green-500 to-green-600 rounded-xl flex items-center justify-center mr-3">
+                    <Gift className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
                   </div>
                   Make a Donation
                 </CardTitle>
-                <CardDescription>
-                  Support this fundraising campaign with your contribution
-                </CardDescription>
+                <CardDescription>Support this cause with your contribution</CardDescription>
               </CardHeader>
               <CardContent>
-                <form onSubmit={handleSubmit} className="space-y-6">
-                  {/* Amount Selection */}
-                  <div>
-                    <label className="text-sm font-medium text-gray-700 mb-3 block">
-                      Select Amount (₹)
-                    </label>
-                    <div className="grid grid-cols-3 gap-2 mb-3">
-                      {presetAmounts.map((amount) => (
-                        <Button
-                          key={amount}
-                          type="button"
-                          variant={formData.amount === amount ? "default" : "outline"}
-                          className="h-12"
-                          onClick={() => setFormData({ ...formData, amount })}
-                        >
-                          ₹{amount}
-                        </Button>
-                      ))}
-                    </div>
+                <form onSubmit={handleSubmit} className="space-y-4">
+                  <div className="space-y-2">
+                    <label className="text-sm font-medium">Your Name *</label>
+                    <Input
+                      value={formData.donor_name}
+                      onChange={(e) => setFormData({ ...formData, donor_name: e.target.value })}
+                      placeholder="Enter your name"
+                      required
+                      className="h-11 sm:h-12"
+                    />
+                  </div>
+                  
+                  <div className="space-y-2">
+                    <label className="text-sm font-medium">Email Address *</label>
+                    <Input
+                      type="email"
+                      value={formData.donor_email}
+                      onChange={(e) => setFormData({ ...formData, donor_email: e.target.value })}
+                      placeholder="your@email.com"
+                      required
+                      className="h-11 sm:h-12"
+                    />
+                  </div>
+                  
+                  <div className="space-y-2">
+                    <label className="text-sm font-medium">Donation Amount (₹) *</label>
                     <Input
                       type="number"
                       value={formData.amount}
-                      onChange={(e) => setFormData({ ...formData, amount: Number(e.target.value) })}
-                      placeholder="Enter custom amount"
-                      className="h-12 border-2 focus:border-primary"
+                      onChange={(e) => setFormData({ ...formData, amount: parseInt(e.target.value) || 0 })}
+                      placeholder="100"
                       min="1"
+                      required
+                      className="h-11 sm:h-12"
                     />
                   </div>
-
-                  {/* Donor Information */}
-                  <div className="space-y-4">
-                    <div>
-                      <label className="text-sm font-medium text-gray-700 mb-2 block">
-                        Your Name *
-                      </label>
-                      <Input
-                        value={formData.donor_name}
-                        onChange={(e) => setFormData({ ...formData, donor_name: e.target.value })}
-                        placeholder="Enter your name"
-                        className="h-12 border-2 focus:border-primary"
-                        required
-                      />
-                    </div>
-                    <div>
-                      <label className="text-sm font-medium text-gray-700 mb-2 block">
-                        Email Address *
-                      </label>
-                      <Input
-                        type="email"
-                        value={formData.donor_email}
-                        onChange={(e) => setFormData({ ...formData, donor_email: e.target.value })}
-                        placeholder="Enter your email"
-                        className="h-12 border-2 focus:border-primary"
-                        required
-                      />
-                    </div>
-                    <div>
-                      <label className="text-sm font-medium text-gray-700 mb-2 block">
-                        Message (Optional)
-                      </label>
-                      <Textarea
-                        value={formData.message}
-                        onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                        placeholder="Leave a message of support..."
-                        rows={3}
-                        className="border-2 focus:border-primary resize-none"
-                      />
-                    </div>
+                  
+                  <div className="space-y-2">
+                    <label className="text-sm font-medium">Message (Optional)</label>
+                    <Textarea
+                      value={formData.message}
+                      onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                      placeholder="Leave a message of support..."
+                      className="min-h-[100px] sm:min-h-[120px] resize-none"
+                    />
                   </div>
-
-                  {/* Payment Method */}
-                  <div>
-                    <label className="text-sm font-medium text-gray-700 mb-3 block">
-                      Payment Method
-                    </label>
-                    <div className="space-y-2">
-                      <div className="flex items-center space-x-3 p-3 border-2 border-primary rounded-lg bg-primary/5">
-                        <CheckCircle className="w-5 h-5 text-primary" />
-                        <div>
-                          <p className="font-medium text-gray-900">UPI Payment</p>
-                          <p className="text-sm text-gray-600">Pay using any UPI app</p>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Submit Button */}
-                  <Button 
-                    type="submit" 
-                    className="w-full h-12 bg-gradient-to-r from-primary to-primary/80 hover:from-primary/90 hover:to-primary/70"
+                  
+                  <Button
+                    type="submit"
                     disabled={submitting}
+                    className="w-full h-11 sm:h-12 bg-gradient-to-r from-primary to-primary/80 hover:from-primary/90 hover:to-primary/70"
                   >
                     {submitting ? (
                       <>
@@ -363,17 +292,50 @@ export default function DonatePage() {
                     ) : (
                       <>
                         <Heart className="w-4 h-4 mr-2" />
-                        Donate ₹{formData.amount.toLocaleString()}
+                        Donate ₹{formData.amount}
                       </>
                     )}
                   </Button>
-
-                  <p className="text-xs text-gray-500 text-center">
-                    Your donation will be processed securely and will directly support this fundraising campaign.
-                  </p>
                 </form>
               </CardContent>
             </Card>
+
+            {/* Recent Donations */}
+            {affiliateLink.donations && affiliateLink.donations.length > 0 && (
+              <Card className="shadow-xl border-0 bg-white/80 backdrop-blur-sm">
+                <CardHeader>
+                  <CardTitle className="flex items-center">
+                    <div className="w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-br from-purple-500 to-purple-600 rounded-xl flex items-center justify-center mr-3">
+                      <Users className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
+                    </div>
+                    Recent Donations
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <div className="space-y-3">
+                    {affiliateLink.donations.slice(0, 5).map((donation, index) => (
+                      <div key={index} className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+                        <div className="flex items-center space-x-3">
+                          <div className="w-8 h-8 bg-primary/10 rounded-full flex items-center justify-center">
+                            <Heart className="w-4 h-4 text-primary" />
+                          </div>
+                          <div>
+                            <p className="text-sm font-medium text-gray-900">{donation.donor_name}</p>
+                            {donation.message && (
+                              <p className="text-xs text-gray-600 truncate max-w-[200px]">{donation.message}</p>
+                            )}
+                          </div>
+                        </div>
+                        <div className="text-right">
+                          <p className="text-sm font-bold text-primary">₹{formatAmount(donation.amount)}</p>
+                          <p className="text-xs text-gray-500">{new Date(donation.created_at).toLocaleDateString()}</p>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </CardContent>
+              </Card>
+            )}
           </div>
         </div>
       </div>

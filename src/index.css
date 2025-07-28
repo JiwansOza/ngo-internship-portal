@@ -104,3 +104,165 @@ All colors MUST be HSL.
     @apply bg-background text-foreground;
   }
 }
+
+/* Mobile-specific improvements */
+@layer components {
+  /* Improve touch targets on mobile */
+  @media (max-width: 768px) {
+    button, 
+    [role="button"],
+    input[type="button"],
+    input[type="submit"],
+    input[type="reset"] {
+      min-height: 44px;
+      min-width: 44px;
+    }
+    
+    /* Improve form inputs on mobile */
+    input, 
+    textarea, 
+    select {
+      font-size: 16px; /* Prevents zoom on iOS */
+    }
+    
+    /* Better spacing for mobile cards */
+    .card {
+      margin: 0.5rem;
+    }
+    
+    /* Improve mobile navigation */
+    .mobile-nav {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: white;
+      border-top: 1px solid #e5e7eb;
+      z-index: 50;
+    }
+    
+    /* Better mobile scrolling */
+    .mobile-scroll {
+      -webkit-overflow-scrolling: touch;
+    }
+    
+    /* Improve mobile modals */
+    .mobile-modal {
+      max-height: 90vh;
+      overflow-y: auto;
+    }
+    
+    /* Better mobile text sizing */
+    .mobile-text {
+      line-height: 1.5;
+    }
+    
+    /* Improve mobile buttons */
+    .mobile-button {
+      padding: 0.75rem 1rem;
+      border-radius: 0.5rem;
+      font-weight: 500;
+    }
+    
+    /* Better mobile spacing */
+    .mobile-spacing {
+      padding: 1rem;
+    }
+    
+    /* Improve mobile grid layouts */
+    .mobile-grid {
+      grid-template-columns: 1fr;
+      gap: 1rem;
+    }
+    
+    /* Better mobile flex layouts */
+    .mobile-flex {
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+    
+    /* Improve mobile shadows */
+    .mobile-shadow {
+      box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+    }
+  }
+  
+  /* Tablet improvements */
+  @media (min-width: 769px) and (max-width: 1024px) {
+    .tablet-grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.5rem;
+    }
+    
+    .tablet-flex {
+      flex-direction: row;
+      gap: 1rem;
+    }
+  }
+  
+  /* Prevent horizontal scroll on mobile */
+  @media (max-width: 768px) {
+    body {
+      overflow-x: hidden;
+    }
+    
+    .container {
+      padding-left: 1rem;
+      padding-right: 1rem;
+    }
+  }
+  
+  /* Improve mobile performance */
+  @media (max-width: 768px) {
+    * {
+      -webkit-tap-highlight-color: transparent;
+    }
+    
+    /* Reduce animations on mobile for better performance */
+    .mobile-reduce-animations {
+      animation: none !important;
+      transition: none !important;
+    }
+  }
+  
+  /* Better mobile typography */
+  @media (max-width: 768px) {
+    h1 {
+      font-size: 1.75rem;
+      line-height: 2rem;
+    }
+    
+    h2 {
+      font-size: 1.5rem;
+      line-height: 2rem;
+    }
+    
+    h3 {
+      font-size: 1.25rem;
+      line-height: 1.75rem;
+    }
+    
+    p {
+      font-size: 0.875rem;
+      line-height: 1.25rem;
+    }
+  }
+  
+  /* Improve mobile accessibility */
+  @media (max-width: 768px) {
+    /* Better focus indicators */
+    button:focus,
+    input:focus,
+    textarea:focus,
+    select:focus {
+      outline: 2px solid hsl(var(--primary));
+      outline-offset: 2px;
+    }
+    
+    /* Better contrast for mobile */
+    .mobile-contrast {
+      color: hsl(var(--foreground));
+      background: hsl(var(--background));
+    }
+  }
+}

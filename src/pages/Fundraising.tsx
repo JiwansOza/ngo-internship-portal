@@ -211,51 +211,51 @@ export default function Fundraising() {
                 variant="ghost"
                 size="sm"
                 onClick={() => navigate("/dashboard")}
-                className="mr-4 hover:bg-primary/5"
+                className="mr-2 sm:mr-4 hover:bg-primary/5 p-2 sm:px-3"
               >
-                <ArrowLeft className="w-4 h-4 mr-2" />
-                Back to Dashboard
+                <ArrowLeft className="w-4 h-4 sm:mr-2" />
+                <span className="hidden sm:inline">Back to Dashboard</span>
               </Button>
               <div className="relative">
-                <Users className="h-8 w-8 text-primary mr-3" />
-                <Sparkles className="h-4 w-4 text-primary/60 animate-ping absolute -top-1 -right-1" />
+                <Users className="h-6 w-6 sm:h-8 sm:w-8 text-primary mr-2 sm:mr-3" />
+                <Sparkles className="h-3 w-3 sm:h-4 sm:w-4 text-primary/60 animate-ping absolute -top-1 -right-1" />
               </div>
-              <h1 className="text-xl font-semibold text-gray-900">Fundraising Tracker</h1>
+              <h1 className="text-base sm:text-xl font-semibold text-gray-900">Fundraising Tracker</h1>
             </div>
             <div className="flex items-center space-x-2">
               <Button
                 variant="outline"
                 size="sm"
                 onClick={() => navigate("/affiliate")}
-                className="hover:bg-primary/5 hover:text-primary hover:border-primary/20 transition-colors"
+                className="hover:bg-primary/5 hover:text-primary hover:border-primary/20 transition-colors p-2 sm:px-3"
               >
-                <Link className="w-4 h-4 mr-2" />
-                My Link
+                <Link className="w-4 h-4 sm:mr-2" />
+                <span className="hidden sm:inline">My Link</span>
               </Button>
             </div>
           </div>
         </div>
       </header>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
         {/* Header Section */}
-        <div className="mb-8">
+        <div className="mb-6 sm:mb-8">
           <div className="flex items-center space-x-3 mb-2">
             <div className="w-2 h-2 bg-primary rounded-full animate-pulse"></div>
-            <h2 className="text-2xl font-bold text-gray-900">Fundraising Dashboard</h2>
+            <h2 className="text-xl sm:text-2xl font-bold text-gray-900">Fundraising Dashboard</h2>
           </div>
-          <p className="text-gray-600">Track your progress and compete with other fundraisers</p>
+          <p className="text-sm sm:text-base text-gray-600">Track your progress and compete with other fundraisers</p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 sm:gap-8">
           {/* Main Content */}
-          <div className="lg:col-span-2 space-y-8">
+          <div className="lg:col-span-2 space-y-6 sm:space-y-8">
             {/* My Progress */}
             <Card className="shadow-xl border-0 bg-white/80 backdrop-blur-sm hover:shadow-2xl transition-all duration-300">
               <CardHeader>
                 <CardTitle className="flex items-center">
-                  <div className="w-12 h-12 bg-gradient-to-br from-purple-500 to-purple-600 rounded-xl flex items-center justify-center mr-3">
-                    <Target className="w-6 h-6 text-white" />
+                  <div className="w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-br from-purple-500 to-purple-600 rounded-xl flex items-center justify-center mr-3">
+                    <Target className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
                   </div>
                   Your Fundraising Progress
                 </CardTitle>
@@ -265,10 +265,10 @@ export default function Fundraising() {
                 {myProgress && (
                   <div className="space-y-6">
                     <div className="text-center">
-                      <div className="text-5xl font-bold text-primary mb-2">
+                      <div className="text-3xl sm:text-4xl lg:text-5xl font-bold text-primary mb-2">
                         ₹{myProgress.collected_amount.toLocaleString()}
                       </div>
-                      <div className="text-lg text-gray-600">
+                      <div className="text-base sm:text-lg text-gray-600">
                         of ₹{myProgress.target_amount.toLocaleString()} goal
                       </div>
                     </div>
@@ -282,16 +282,16 @@ export default function Fundraising() {
                       </div>
                       <Progress 
                         value={calculateProgress(myProgress.collected_amount, myProgress.target_amount)} 
-                        className="h-4"
+                        className="h-3 sm:h-4"
                       />
                     </div>
 
                     {/* Milestone Rewards */}
                     <div className="pt-4">
                       <h4 className="text-sm font-medium text-gray-700 mb-3">Milestone Rewards</h4>
-                      <div className="flex space-x-2">
+                      <div className="flex flex-wrap gap-2">
                         {getMilestoneRewards(calculateProgress(myProgress.collected_amount, myProgress.target_amount)).map((milestone, index) => (
-                          <div key={index} className="flex items-center space-x-1 px-3 py-1 bg-yellow-100 rounded-full">
+                          <div key={index} className="flex items-center space-x-1 px-2 sm:px-3 py-1 bg-yellow-100 rounded-full">
                             <span className="text-sm">{milestone.icon}</span>
                             <span className="text-xs font-medium text-yellow-800">{milestone.reward}</span>
                           </div>
@@ -299,171 +299,27 @@ export default function Fundraising() {
                       </div>
                     </div>
 
-                    <div className="grid grid-cols-2 gap-4 pt-4">
-                      <div className="text-center p-4 bg-green-50 rounded-xl border border-green-200">
-                        <div className="text-2xl font-bold text-green-600">
-                          ₹{(myProgress.target_amount - myProgress.collected_amount).toLocaleString()}
-                        </div>
-                        <div className="text-sm text-green-600">Remaining</div>
-                      </div>
-                      <div className="text-center p-4 bg-blue-50 rounded-xl border border-blue-200">
-                        <div className="text-2xl font-bold text-blue-600">
-                          {Math.round(calculateProgress(myProgress.collected_amount, myProgress.target_amount))}%
-                        </div>
-                        <div className="text-sm text-blue-600">Completed</div>
-                      </div>
-                    </div>
-
-                    <div className="pt-4 space-y-3">
-                      <Dialog open={isUpdateDialogOpen} onOpenChange={setIsUpdateDialogOpen}>
-                        <DialogTrigger asChild>
-                          <Button className="w-full bg-gradient-to-r from-primary to-primary/80 hover:from-primary/90 hover:to-primary/70 shadow-lg hover:shadow-xl transition-all duration-300" size="lg">
-                            <Plus className="w-5 h-5 mr-2" />
-                            Update Progress
-                          </Button>
-                        </DialogTrigger>
-                        <DialogContent>
-                          <DialogHeader>
-                            <DialogTitle>Update Fundraising Progress</DialogTitle>
-                            <DialogDescription>
-                              Add the amount you've collected to update your progress
-                            </DialogDescription>
-                          </DialogHeader>
-                          <div className="space-y-4">
-                            <div>
-                              <Label htmlFor="amount">Amount Collected (₹)</Label>
-                              <Input
-                                id="amount"
-                                type="number"
-                                placeholder="Enter amount"
-                                value={updateAmount}
-                                onChange={(e) => setUpdateAmount(e.target.value)}
-                              />
-                            </div>
-                            <Button onClick={updateProgress} className="w-full">
-                              <TrendingUp className="w-4 h-4 mr-2" />
-                              Update Progress
-                            </Button>
-                          </div>
-                        </DialogContent>
-                      </Dialog>
+                    {/* Update Progress Button */}
+                    <div className="pt-4">
+                      <Button 
+                        onClick={() => setIsUpdateDialogOpen(true)}
+                        className="w-full bg-gradient-to-r from-primary to-primary/80 hover:from-primary/90 hover:to-primary/70"
+                      >
+                        <Plus className="w-4 h-4 mr-2" />
+                        Update Progress
+                      </Button>
                     </div>
                   </div>
                 )}
               </CardContent>
             </Card>
 
-            {/* Affiliate Link Section */}
-            {affiliateLink && (
-              <Card className="shadow-lg border-0 bg-white/80 backdrop-blur-sm hover:shadow-xl transition-all duration-300">
-                <CardHeader>
-                  <CardTitle className="flex items-center">
-                    <div className="w-10 h-10 bg-gradient-to-br from-green-500 to-green-600 rounded-xl flex items-center justify-center mr-3">
-                      <Share2 className="w-5 h-5 text-white" />
-                    </div>
-                    Share Your Fundraising Link
-                  </CardTitle>
-                  <CardDescription>Share this link to collect donations from supporters</CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <div className="space-y-4">
-                    <div className="p-4 bg-gradient-to-r from-green-50 to-blue-50 rounded-xl border border-green-200">
-                      <div className="flex items-center justify-between">
-                        <div>
-                          <p className="font-medium text-gray-900">{affiliateLink.title}</p>
-                          <p className="text-sm text-gray-600">{affiliateLink.description}</p>
-                        </div>
-                        <Button
-                          variant="outline"
-                          size="sm"
-                          onClick={() => copyToClipboard(generateShareableUrl(affiliateLink.link_code))}
-                        >
-                          <Share2 className="w-4 h-4 mr-2" />
-                          Copy Link
-                        </Button>
-                      </div>
-                      <div className="mt-3 p-3 bg-white rounded-lg border">
-                        <p className="text-sm font-mono text-gray-600 break-all">
-                          {generateShareableUrl(affiliateLink.link_code)}
-                        </p>
-                      </div>
-                    </div>
-                    <div className="flex space-x-2">
-                      <Button
-                        variant="outline"
-                        onClick={() => navigate("/affiliate")}
-                        className="flex-1"
-                      >
-                        <Link className="w-4 h-4 mr-2" />
-                        Manage Link
-                      </Button>
-                      <Button
-                        variant="outline"
-                        onClick={() => window.open(generateShareableUrl(affiliateLink.link_code), '_blank')}
-                        className="flex-1"
-                      >
-                        <Gift className="w-4 h-4 mr-2" />
-                        Test Link
-                      </Button>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-            )}
-
-            {/* Fundraising Tips */}
-            <Card className="shadow-lg border-0 bg-white/80 backdrop-blur-sm hover:shadow-xl transition-all duration-300">
-              <CardHeader>
-                <CardTitle className="flex items-center">
-                  <div className="w-10 h-10 bg-gradient-to-br from-yellow-500 to-yellow-600 rounded-xl flex items-center justify-center mr-3">
-                    <Lightbulb className="w-5 h-5 text-white" />
-                  </div>
-                  Fundraising Tips
-                </CardTitle>
-                <CardDescription>Strategies to help you reach your goal</CardDescription>
-              </CardHeader>
-              <CardContent>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <div className="p-4 bg-yellow-50 rounded-xl border border-yellow-200 hover:shadow-md transition-shadow">
-                    <div className="flex items-center mb-2">
-                      <Target className="w-4 h-4 text-yellow-600 mr-2" />
-                      <h4 className="font-medium text-yellow-800">Set Mini Goals</h4>
-                    </div>
-                    <p className="text-sm text-yellow-700">Break your target into smaller, achievable milestones.</p>
-                  </div>
-                  <div className="p-4 bg-blue-50 rounded-xl border border-blue-200 hover:shadow-md transition-shadow">
-                    <div className="flex items-center mb-2">
-                      <Zap className="w-4 h-4 text-blue-600 mr-2" />
-                      <h4 className="font-medium text-blue-800">Use Social Media</h4>
-                    </div>
-                    <p className="text-sm text-blue-700">Share your cause on social platforms to reach more people.</p>
-                  </div>
-                  <div className="p-4 bg-green-50 rounded-xl border border-green-200 hover:shadow-md transition-shadow">
-                    <div className="flex items-center mb-2">
-                      <Users className="w-4 h-4 text-green-600 mr-2" />
-                      <h4 className="font-medium text-green-800">Personal Networks</h4>
-                    </div>
-                    <p className="text-sm text-green-700">Start with family and friends who believe in your mission.</p>
-                  </div>
-                  <div className="p-4 bg-purple-50 rounded-xl border border-purple-200 hover:shadow-md transition-shadow">
-                    <div className="flex items-center mb-2">
-                      <MessageSquare className="w-4 h-4 text-purple-600 mr-2" />
-                      <h4 className="font-medium text-purple-800">Tell Your Story</h4>
-                    </div>
-                    <p className="text-sm text-purple-700">Share why this cause matters to you personally.</p>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-          </div>
-
-          {/* Sidebar - Leaderboard */}
-          <div className="space-y-8">
+            {/* Leaderboard */}
             <Card className="shadow-xl border-0 bg-white/80 backdrop-blur-sm hover:shadow-2xl transition-all duration-300">
               <CardHeader>
                 <CardTitle className="flex items-center">
-                  <div className="w-10 h-10 bg-gradient-to-br from-yellow-500 to-yellow-600 rounded-xl flex items-center justify-center mr-3">
-                    <Trophy className="w-5 h-5 text-white" />
+                  <div className="w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-br from-yellow-500 to-yellow-600 rounded-xl flex items-center justify-center mr-3">
+                    <Trophy className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
                   </div>
                   Leaderboard
                 </CardTitle>
@@ -471,85 +327,211 @@ export default function Fundraising() {
               </CardHeader>
               <CardContent>
                 <div className="space-y-4">
-                  {leaderboard.map((fundraiser, index) => {
-                    const progress = calculateProgress(fundraiser.collected_amount, fundraiser.target_amount);
-                    const isCurrentUser = fundraiser.user_id === user?.id;
-                    
-                    return (
-                      <div 
-                        key={fundraiser.id} 
-                        className={`flex items-center space-x-3 p-4 rounded-xl border transition-all duration-200 hover:shadow-md ${
-                          isCurrentUser ? 'bg-primary/10 border-primary/30 shadow-md' : 'bg-gray-50 border-gray-200'
-                        }`}
-                      >
-                        <div className="flex-shrink-0">
+                  {leaderboard.map((item, index) => (
+                    <div key={item.id} className="flex items-center space-x-4 p-4 rounded-xl border border-gray-200 hover:border-primary/30 transition-all duration-200">
+                      <div className="flex items-center space-x-3">
+                        <div className="w-8 h-8 sm:w-10 sm:h-10 bg-gradient-to-br from-gray-100 to-gray-200 rounded-full flex items-center justify-center">
                           {getLeaderboardIcon(index)}
                         </div>
-                        <div className="flex-1 min-w-0">
-                          <div className="flex items-center justify-between mb-2">
-                            <p className={`text-sm font-medium truncate ${isCurrentUser ? 'text-primary' : 'text-gray-900'}`}>
-                              {fundraiser.profiles?.full_name || 'Anonymous'}
-                              {isCurrentUser && <Badge variant="secondary" className="ml-2">You</Badge>}
-                            </p>
-                            <span className="text-sm font-bold text-primary">
-                              ₹{fundraiser.collected_amount.toLocaleString()}
-                            </span>
-                          </div>
-                          <div className="space-y-1">
-                            <div className="flex items-center justify-between text-xs text-gray-600">
-                              <span>Progress</span>
-                              <span className={getProgressColor(progress)}>{Math.round(progress)}%</span>
-                            </div>
-                            <Progress value={progress} className="h-2" />
-                          </div>
+                        <div>
+                          <h4 className="font-medium text-sm sm:text-base text-gray-900">
+                            {item.profiles?.full_name || `Fundraiser ${index + 1}`}
+                          </h4>
+                          <p className="text-xs sm:text-sm text-gray-500">
+                            {index === 0 ? "🥇 Gold" : index === 1 ? "🥈 Silver" : index === 2 ? "🥉 Bronze" : `#${index + 1}`}
+                          </p>
                         </div>
                       </div>
-                    );
-                  })}
+                      <div className="ml-auto text-right">
+                        <div className="text-lg sm:text-xl font-bold text-primary">
+                          ₹{item.collected_amount.toLocaleString()}
+                        </div>
+                        <div className="text-xs sm:text-sm text-gray-500">
+                          {Math.round(calculateProgress(item.collected_amount, item.target_amount))}% complete
+                        </div>
+                      </div>
+                    </div>
+                  ))}
                 </div>
               </CardContent>
             </Card>
+          </div>
 
-            {/* Quick Stats */}
-            <Card className="shadow-lg border-0 bg-white/80 backdrop-blur-sm">
+          {/* Sidebar */}
+          <div className="space-y-6 sm:space-y-8">
+            {/* Affiliate Link */}
+            <Card className="shadow-xl border-0 bg-white/80 backdrop-blur-sm hover:shadow-2xl transition-all duration-300">
               <CardHeader>
                 <CardTitle className="flex items-center">
-                  <div className="w-10 h-10 bg-gradient-to-br from-blue-500 to-blue-600 rounded-xl flex items-center justify-center mr-3">
-                    <BarChart3 className="w-5 h-5 text-white" />
+                  <div className="w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-br from-blue-500 to-blue-600 rounded-xl flex items-center justify-center mr-3">
+                    <Link className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
                   </div>
-                  Quick Stats
+                  Your Payment Link
+                </CardTitle>
+                <CardDescription>Share this link to collect donations</CardDescription>
+              </CardHeader>
+              <CardContent>
+                {affiliateLink ? (
+                  <div className="space-y-4">
+                    <div className="space-y-2">
+                      <Label className="text-sm font-medium">Link Title</Label>
+                      <p className="text-sm text-gray-900 font-medium">{affiliateLink.title}</p>
+                    </div>
+                    
+                    <div className="space-y-2">
+                      <Label className="text-sm font-medium">Description</Label>
+                      <p className="text-sm text-gray-600">{affiliateLink.description}</p>
+                    </div>
+
+                    <div className="space-y-2">
+                      <Label className="text-sm font-medium">Target Amount</Label>
+                      <p className="text-lg font-bold text-primary">₹{affiliateLink.target_amount.toLocaleString()}</p>
+                    </div>
+
+                    <div className="space-y-3">
+                      <Label className="text-sm font-medium">Shareable Link</Label>
+                      <div className="flex space-x-2">
+                        <Input
+                          value={generateShareableUrl(affiliateLink.link_code)}
+                          readOnly
+                          className="text-xs sm:text-sm"
+                        />
+                        <Button
+                          size="sm"
+                          onClick={() => copyToClipboard(generateShareableUrl(affiliateLink.link_code))}
+                          className="flex-shrink-0"
+                        >
+                          <Share2 className="w-4 h-4" />
+                        </Button>
+                      </div>
+                    </div>
+
+                    <div className="flex space-x-2">
+                      <Button
+                        variant="outline"
+                        size="sm"
+                        onClick={() => navigate("/affiliate")}
+                        className="flex-1"
+                      >
+                        <Link className="w-4 h-4 mr-2" />
+                        Manage Link
+                      </Button>
+                      <Button
+                        size="sm"
+                        onClick={() => copyToClipboard(generateShareableUrl(affiliateLink.link_code))}
+                        className="flex-1"
+                      >
+                        <Share2 className="w-4 h-4 mr-2" />
+                        Share
+                      </Button>
+                    </div>
+                  </div>
+                ) : (
+                  <div className="text-center space-y-4">
+                    <div className="w-12 h-12 sm:w-16 sm:h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto">
+                      <Link className="w-6 h-6 sm:w-8 sm:h-8 text-gray-400" />
+                    </div>
+                    <p className="text-sm sm:text-base text-gray-600">No affiliate link created yet</p>
+                    <Button
+                      onClick={() => navigate("/affiliate")}
+                      className="w-full bg-gradient-to-r from-primary to-primary/80 hover:from-primary/90 hover:to-primary/70"
+                    >
+                      <Link className="w-4 h-4 mr-2" />
+                      Create Link
+                    </Button>
+                  </div>
+                )}
+              </CardContent>
+            </Card>
+
+            {/* Tips and Tricks */}
+            <Card className="shadow-xl border-0 bg-white/80 backdrop-blur-sm">
+              <CardHeader>
+                <CardTitle className="flex items-center">
+                  <div className="w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-br from-green-500 to-green-600 rounded-xl flex items-center justify-center mr-3">
+                    <Lightbulb className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
+                  </div>
+                  Fundraising Tips
                 </CardTitle>
               </CardHeader>
               <CardContent>
                 <div className="space-y-4">
-                  <div className="flex justify-between items-center p-3 bg-green-50 rounded-lg">
-                    <span className="text-sm text-green-700">Total Raised</span>
-                    <span className="font-semibold text-green-600">₹{leaderboard.reduce((sum, item) => sum + item.collected_amount, 0).toLocaleString()}</span>
-                  </div>
-                  <div className="flex justify-between items-center p-3 bg-blue-50 rounded-lg">
-                    <span className="text-sm text-blue-700">Active Fundraisers</span>
-                    <span className="font-semibold text-blue-600">{leaderboard.length}</span>
-                  </div>
-                  <div className="flex justify-between items-center p-3 bg-purple-50 rounded-lg">
-                    <span className="text-sm text-purple-700">Your Rank</span>
-                    <span className="font-semibold text-purple-600">
-                      #{leaderboard.findIndex(item => item.user_id === user?.id) + 1 || 'N/A'}
-                    </span>
-                  </div>
-                  {myProgress && (
-                    <div className="flex justify-between items-center p-3 bg-orange-50 rounded-lg">
-                      <span className="text-sm text-orange-700">Days Active</span>
-                      <span className="font-semibold text-orange-600">
-                        {Math.ceil((Date.now() - new Date(myProgress.created_at).getTime()) / (1000 * 60 * 60 * 24))}
-                      </span>
+                  <div className="flex items-start space-x-3">
+                    <div className="w-6 h-6 bg-blue-100 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                      <span className="text-xs font-bold text-blue-600">1</span>
                     </div>
-                  )}
+                    <div>
+                      <h4 className="text-sm font-medium text-gray-900">Share Your Story</h4>
+                      <p className="text-xs sm:text-sm text-gray-600">Tell people why this cause matters to you</p>
+                    </div>
+                  </div>
+                  
+                  <div className="flex items-start space-x-3">
+                    <div className="w-6 h-6 bg-green-100 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                      <span className="text-xs font-bold text-green-600">2</span>
+                    </div>
+                    <div>
+                      <h4 className="text-sm font-medium text-gray-900">Use Social Media</h4>
+                      <p className="text-xs sm:text-sm text-gray-600">Post regularly about your progress</p>
+                    </div>
+                  </div>
+                  
+                  <div className="flex items-start space-x-3">
+                    <div className="w-6 h-6 bg-purple-100 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                      <span className="text-xs font-bold text-purple-600">3</span>
+                    </div>
+                    <div>
+                      <h4 className="text-sm font-medium text-gray-900">Follow Up</h4>
+                      <p className="text-xs sm:text-sm text-gray-600">Thank donors and keep them updated</p>
+                    </div>
+                  </div>
                 </div>
               </CardContent>
             </Card>
           </div>
         </div>
       </div>
+
+      {/* Update Progress Dialog */}
+      <Dialog open={isUpdateDialogOpen} onOpenChange={setIsUpdateDialogOpen}>
+        <DialogContent className="sm:max-w-md">
+          <DialogHeader>
+            <DialogTitle>Update Fundraising Progress</DialogTitle>
+            <DialogDescription>
+              Enter the amount you've collected since your last update
+            </DialogDescription>
+          </DialogHeader>
+          <div className="space-y-4">
+            <div className="space-y-2">
+              <Label htmlFor="amount">Amount Collected (₹)</Label>
+              <Input
+                id="amount"
+                type="number"
+                placeholder="0"
+                value={updateAmount}
+                onChange={(e) => setUpdateAmount(e.target.value)}
+                className="text-lg"
+              />
+            </div>
+            <div className="flex space-x-2">
+              <Button
+                variant="outline"
+                onClick={() => setIsUpdateDialogOpen(false)}
+                className="flex-1"
+              >
+                Cancel
+              </Button>
+              <Button
+                onClick={updateProgress}
+                disabled={!updateAmount || parseFloat(updateAmount) <= 0}
+                className="flex-1 bg-gradient-to-r from-primary to-primary/80 hover:from-primary/90 hover:to-primary/70"
+              >
+                Update
+              </Button>
+            </div>
+          </div>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 }
